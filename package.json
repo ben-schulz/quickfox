@@ -1,0 +1,32 @@
+{
+  "name": "quickfox",
+  "version": "0.0.0",
+  "description": "The quick fox jumps over the lazy brown dog.",
+  "main": "index.js",
+  "dependencies": {
+    "chai": "~3.5.0",
+    "mocha": "~3.0.2"
+  },
+  "devDependencies": {
+    "chai": "~3.5.0",
+    "mocha": "~3.0.2",
+    "gulp": "~3.9.1",
+    "jshint-stylish": "~2.2.1",
+    "jshint": "~2.9.3",
+    "gulp-jshint": "~2.0.1",
+    "gulp-mocha": "~3.0.1",
+    "gulp-util": "~3.0.7"
+  },
+  "scripts": {
+    "test": "./node_modules/mocha/bin/mocha --reporter nyan"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ben-schulz/quickfox.git"
+  },
+  "author": "Benjamin Schulz",
+  "license": "GNU GPL 3",
+  "bugs": {
+    "url": "https://github.com/ben-schulz/quickfox/issues"
+  }
+}
