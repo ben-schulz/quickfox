@@ -34,4 +34,7 @@ var readerCore = {};
 }).apply(readerCore);
 
 
-module.exports = readerCore
+if('undefined' != typeof(module)){
+    module.exports = readerCore
+}
+

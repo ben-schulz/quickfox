@@ -23,4 +23,7 @@ var tripleStore = {};
 
 }).apply(tripleStore);
 
-module.exports = tripleStore;
+if('undefined' != typeof(module)){
+    module.exports = tripleStore;
+}
+
