@@ -1,26 +1,33 @@
 var xhttpUtil = {};
 
 (function (){
-    this.getPlainText = function(uri, callback){
-	var client = new XMLHttpRequest();
 
-	client.responseType = 'text';
-	client.open('GET', uri, true);
-	client.onreadystatechange = function(){
+    function getContentType(theType){
 
-	    if('function' !== typeof(callback)){
-		return;
-	    }
+	return function(uri, callback){
+	    var client = new XMLHttpRequest();
 
-	    if(XMLHttpRequest.DONE === client.readyState){
+	    client.responseType = theType;
+	    client.open('GET', uri, true);
+	    client.onreadystatechange = function(){
 
-		if(200 === client.status){
-		    callback(client.responseText);
+		if('function' !== typeof(callback)){
+		    return;
 		}
-	    }
-	};
 
-	client.send();
-    };
+		if(XMLHttpRequest.DONE === client.readyState){
+
+		    if(200 === client.status){
+			callback(client.responseText);
+		    }
+		}
+	    };
+
+	    client.send();
+	};
+    }
+
+    this.getPlainText = getContentType('text');
+    this.getJSON = getContentType('application/json');
 
 }).apply(xhttpUtil);
