@@ -1,5 +1,3 @@
-var textDestinationNodeId = 'annotatedText';
-
 var roughUI = {};
 
 (function()
@@ -31,10 +29,7 @@ var roughUI = {};
 
 	    var readableOutput = highlightReferences(originalText, metatext);
 
-	    var destinationNode =
-		document.getElementById(textDestinationNodeId);
-
-	    destinationNode.innerHTML = readableOutput;
+	    textDestinationNode.innerHTML = readableOutput;
 	};
 
 	xhttpUtil.getPlainText(testFileUri, xhttpCallback);

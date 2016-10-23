@@ -1,12 +1,15 @@
 <html>
+  <script src="../util/pageinit.js"></script>
   <script src="../util/xhttp.js"></script>
   <script src="../tripleStore/tripleStore.js"></script>
   <script src="../reader/core.js"></script>
   <script src="rough.js"></script>
 
-  <input type="text" id="openText" onchange="roughUI.render(this.value)" />
+  <body onload="pageInit()">
+    <input type="text" id="openText" onchange="roughUI.render(this.value)" />
 
-  <div id="annotatedText">
-  </div>
+    <div id="annotatedText">
+    </div>
+  </body>
 
 </html>
