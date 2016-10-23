@@ -20,18 +20,24 @@ var roughUI = {};
 	return output;
     };
 
-    this.render = function()
+    this.render = function(testFileUri)
     {
-	var testTriple = {subj: 'fox', obj: '', pred: ''};
-	tripleStore.add(testTriple);
-	var originalText = 'the quick fox jumped';
-	var metatext = readerCore.annotate(originalText, tripleStore);
+	var xhttpCallback = function(originalText){
+	    
+	    var testTriple = {subj: 'fox', obj: '', pred: ''};
+	    tripleStore.add(testTriple);
 
-	var readableOutput = highlightReferences(originalText, metatext);
+	    var metatext = readerCore.annotate(originalText, tripleStore);
 
-	var destinationNode = document.getElementById(textDestinationNodeId);
+	    var readableOutput = highlightReferences(originalText, metatext);
 
-	destinationNode.innerHTML = readableOutput;
+	    var destinationNode =
+		document.getElementById(textDestinationNodeId);
+
+	    destinationNode.innerHTML = readableOutput;
+	};
+
+	xhttpUtil.getPlainText(testFileUri, xhttpCallback);
     };
 
 }).apply(roughUI);
