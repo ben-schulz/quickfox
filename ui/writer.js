@@ -1,12 +1,11 @@
 
-var writeArea = document.getElementById("mainText");
+const writeArea = document.getElementById("mainText");
 
 document.addEventListener("keydown", function(event){
 
-    const key = event.key
+    const key = event.key;
 
-    var newChar = document.createTextNode(key);
-    console.info(key.length);
+    const newChar = document.createTextNode(key);
 
     if ( 1 == key.length ){
 
@@ -14,13 +13,13 @@ document.addEventListener("keydown", function(event){
     }
 
     else if (" " == key){
-	var spaceChar = document.createTextNode(" ");
+	const spaceChar = document.createTextNode(" ");
 	writeArea.appendChild(spaceChar);
     }
 
     else if ("Backspace" == key){
 
-	var lastChar = writeArea.lastChild;
+	const lastChar = writeArea.lastChild;
 
 	if(lastChar){
 	    writeArea.removeChild(writeArea.lastChild);
