@@ -1,6 +1,8 @@
 const gulp = require('gulp');
-const gutil = require('gulp-util');
 const mocha = require('gulp-mocha');
+
+const jshint = require('gulp-jshint');
+const stylish = require('jshint-stylish');
 
 const concat = require('gulp-concat');
 
@@ -9,20 +11,19 @@ const foxModules = [];
 gulp.task('default', ['watch', 'test']);
 
 gulp.task('jshint', function() {
-  return gulp.src('source/javascript/**/*.js')
-    .pipe(jshint())
-    .pipe(jshint.reporter('jshint-stylish'));
+  return gulp.src('src/javascript/**/*.js')
+	.pipe(jshint())
+	.pipe(jshint.reporter(stylish));
 });
 
 gulp.task('watch', function() {
-  gulp.watch('source/javascript/**/*.js', ['jshint']);
+    gulp.watch('src/**/*.js', ['test', 'jshint']);
 });
 
 gulp.task('test', function() {
-  gulp.src('./test/**/*.js', {read: false})
-      .pipe(mocha({reporter: 'nyan'}))
+    return gulp.src('./test/**/*.js', {read: false})
+	.pipe( mocha( { reporter: 'nyan' } ) )
 });
-
 
 
 gulp.task('concat', function() {
