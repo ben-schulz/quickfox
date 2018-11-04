@@ -22,11 +22,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ben-schulz/quickfox.git"
+    "url": "git+https://github.com/ben-schulz/quickfox.git"
   },
   "author": "Benjamin Schulz",
-  "license": "GNU GPL 3",
+  "license": "GPL-3.0",
   "bugs": {
     "url": "https://github.com/ben-schulz/quickfox/issues"
-  }
+  },
+  "homepage": "https://github.com/ben-schulz/quickfox#readme"
 }
