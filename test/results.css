@@ -1,0 +1,13 @@
+.failText{
+    color: red;
+}
+
+.successText{
+
+    color: green;
+}
+
+#failureList{
+
+    display: none;
+}
