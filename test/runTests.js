@@ -115,6 +115,14 @@ window.addEventListener("load", function(){
 	document.createTextNode( failCount.toString() )
     );
 
+    if( 0 == failCount ){
+
+	document.querySelectorAll(".failSection")
+	    .forEach( function( el ){
+
+		el.style.display = "none";
+	    });
+    }
 });
 
 setInterval(function(){ window.location.reload();  }, 2000);
