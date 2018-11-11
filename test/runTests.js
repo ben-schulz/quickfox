@@ -31,23 +31,6 @@ class TestCase{
     }
 }
 
-class TestRun{
-
-    constructor( name ){
-
-	this.name = name;
-
-	this.results = [];
-
-    }
-
-    addResult(c){
-
-	this.results.push(c);
-    }
-}
-
-
 var globalResults = [ ];
 
 var testCount = 0;
