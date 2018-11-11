@@ -1,6 +1,1 @@
-node_modules/**
-**/*.js~
-**/*.html~
-**/*.json~
-**/*.txt~
-.gitignore~
+*~
