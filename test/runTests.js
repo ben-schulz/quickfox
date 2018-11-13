@@ -64,7 +64,10 @@ var verify = function( name, demonstration ){
 	"./lexeme.js",
 
 	"../src/keyboard.js",
-	"./keyboard.js"
+	"./keyboard.js",
+
+	"../src/textBuffer.js",
+	"./textBuffer.js"
     ];
 
     var loadFile = function(filePath){
