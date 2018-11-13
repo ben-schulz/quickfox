@@ -1,32 +1,29 @@
 class KeyboardInput{
 
-    keypress( key ){
+    _dispatch( eventType, key ){
 
 	var detail = { "detail" : { "key": key } };
 
-	var event = new CustomEvent( "keypress", detail );
+	var event = new CustomEvent( eventType, detail );
 
 	this.target.dispatchEvent( event );
+
+    }
+
+    keypress( key ){
+
+	this._dispatch( "keypress", key );
     }
 
     keydown( key ){
 
-	var detail = { "detail" : { "key": key } };
-
-	var event = new CustomEvent( "keydown", detail );
-
-	this.target.dispatchEvent( event );
+	this._dispatch( "keydown", key );
     }
 
     keyup( key ){
 
-	var detail = { "detail" : { "key": key } };
-
-	var event = new CustomEvent( "keyup", detail );
-
-	this.target.dispatchEvent( event );
+	this._dispatch( "keyup", key );
     }
-
 
     constructor( target ){
 
