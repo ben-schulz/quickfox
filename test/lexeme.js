@@ -5,5 +5,6 @@ verify('on click, highlight Lexeme.', function() {
 
     lex.click();
 
-    assert.isTrue( lex.classList.contains("relationForming") );
+    assert.isTrue(
+	lex.classList.contains( "relationForming" ) );
 });
