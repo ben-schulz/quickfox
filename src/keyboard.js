@@ -34,7 +34,7 @@ class KeyboardInput{
 	}
     }
 
-    bind( node ){
+    bindInput( node ){
 
 	node.addEventListener(
 	    "keypress", event => this.keypress( event.key ) );
