@@ -25,6 +25,15 @@ class KeyboardInput{
 	this._dispatch( "keyup", key );
     }
 
+
+    typeKeys( seq ){
+
+	for( var ix = 0; ix < seq.length; ++ix ){
+
+	    this._dispatch( "keypress", seq[ix] );
+	}
+    }
+
     constructor( target ){
 
 	this.target = target;

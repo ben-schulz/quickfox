@@ -56,3 +56,21 @@ verify("keyup registered", function(){
 
     assert.isTrue( registered );
 });
+
+
+verify("typeString reproduces printable strings", function(){
+
+    var boundElement = document.createElement( "input" );
+    boundElement.type = "text";
+
+    boundElement.addEventListener("keypress", function( event ){
+
+	boundElement.value += event.detail.key;
+    });
+
+    var keyboard = new KeyboardInput( boundElement );
+
+    keyboard.typeKeys( "hello world" );
+
+    assert.areIdentical( "hello world", boundElement.value );
+});
