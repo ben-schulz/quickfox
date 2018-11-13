@@ -61,7 +61,10 @@ var verify = function( name, demonstration ){
 (function(){
     var modules = [
 	"../src/lexeme.js",
-	"./lexeme.js"
+	"./lexeme.js",
+
+	"../src/keyboard.js",
+	"./keyboard.js"
     ];
 
     var loadFile = function(filePath){
