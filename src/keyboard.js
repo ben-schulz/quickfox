@@ -34,6 +34,18 @@ class KeyboardInput{
 	}
     }
 
+    bind( node ){
+
+	node.addEventListener(
+	    "keypress", event => this.keypress( event.key ) );
+
+	node.addEventListener(
+	    "keydown", event => this.keydown( event.key ) );
+
+	node.addEventListener(
+	    "keyup", event => this.keyup( event.key ) );
+    }
+
     constructor( target ){
 
 	this.target = target;
