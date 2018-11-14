@@ -6,11 +6,6 @@ class TextBuffer{
 	this.contents = [];
     }
 
-    listenFor( condition ){
-
-	this._flushCondition = condition;
-    }
-
     onFlush( action, condition ){
 
 	this.element.removeEventListener(
