@@ -5,7 +5,7 @@ verify("keypress registered", function(){
     var registered = false;
     boundElement.addEventListener("keypress", function( event ){
 
-	if( 'x' == event.detail.key ){
+	if( 'x' == event.detail.key.keyValue ){
 	    registered = true;
 	}
     });
@@ -25,7 +25,7 @@ verify("keydown registered", function(){
     var registered = false;
     boundElement.addEventListener("keydown", function( event ){
 
-	if( 'x' == event.detail.key ){
+	if( 'x' == event.detail.key.keyValue ){
 	    registered = true;
 	}
     });
@@ -45,7 +45,7 @@ verify("keyup registered", function(){
     var registered = false;
     boundElement.addEventListener("keyup", function( event ){
 
-	if( 'x' == event.detail.key ){
+	if( 'x' == event.detail.key.keyValue ){
 	    registered = true;
 	}
     });
@@ -65,7 +65,7 @@ verify("typeString reproduces printable strings", function(){
 
     boundElement.addEventListener("keypress", function( event ){
 
-	boundElement.value += event.detail.key;
+	boundElement.value += event.detail.key.keyValue;
     });
 
     var keyboard = new KeyboardInput( boundElement );

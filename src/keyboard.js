@@ -1,8 +1,21 @@
+class Key{
+
+    charEquals( c ){
+
+	return this.keyValue === c;
+    }
+
+    constructor( key ){
+
+	this.keyValue = key;
+    }
+}
+
 class KeyboardInput{
 
     _dispatch( eventType, key ){
 
-	var detail = { "detail" : { "key": key } };
+	var detail = { "detail" : { "key": new Key( key ) } };
 
 	var event = new CustomEvent( eventType, detail );
 

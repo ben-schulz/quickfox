@@ -27,6 +27,19 @@ class TextBuffer{
 	    "keypress", this.buffer );
     }
 
+    print(){
+
+	var token = [];
+	var tokenLength = this.contents.length;
+
+	for( var ix = 0; ix < tokenLength; ++ix ){
+
+	    token.push( this.contents[ix].keyValue );
+	}
+
+	return token.join("");
+    }
+
     constructor( document, type ){
 
 	this.element = document.createElement( type );
