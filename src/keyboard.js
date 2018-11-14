@@ -2,12 +2,14 @@ class Key{
 
     charEquals( c ){
 
-	return this.keyValue === c;
+	return this.keyValue == c;
     }
 
     constructor( key ){
 
 	this.keyValue = key;
+
+	this.isBackspace = key === "Backspace";
     }
 }
 

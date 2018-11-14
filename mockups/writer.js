@@ -5,28 +5,31 @@ var canvas = document.getElementById( "textCanvasDemo" );
 
 var onSpace = contents => {
 
-    return " " == contents.slice(-1);
+    return contents.slice(-1)[0].charEquals(" ");
 };
 
 var writeText = contents => {
 
-    if( "Backspace" === contents[0] ){
+    var token = [];
+    if( !contents[0].isBackspace ){
 
-	contents.splice( 0, 1 );
+	token.push( contents[0].keyValue );
     }
+
 
     for( var ix = 1; ix < contents.length; ++ix ){
 
-	if( "Backspace" === contents[ix] ){
+	if( contents[ix].isBackspace ){
 
-	    contents.splice( ix, 1 );
-	    contents.splice( ix - 1, 1 );
+	    token.splice( ix - 1, 1 );
+	}
+	else{
+	    token.push( contents[ix].keyValue );
 	}
     }
 
-    console.info(contents);
     canvas.appendChild(
-	new Lexeme( contents.join("") ).render() );
+	new Lexeme( token.join( "" ) ).render() );
 };
 
 buffer.onFlush( writeText, onSpace );
