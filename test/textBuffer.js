@@ -5,8 +5,7 @@ verify("receives keystrokes from bound input", function(){
 
     keyboard.typeKeys( "hello world" );
 
-    assert.areEquivalent( "hello world",
-			  buffer.print() );
+    assert.areEquivalent( "hello world", buffer.print() );
 });
 
 
