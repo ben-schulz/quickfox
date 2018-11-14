@@ -3,8 +3,6 @@ var keyboard = new KeyboardInput( buffer.element );
 
 var canvas = document.getElementById( "textCanvasDemo" );
 
-console.info(canvas.firstChild);
-
 var onSpace = contents => {
 
     return " " == contents.slice(-1);
