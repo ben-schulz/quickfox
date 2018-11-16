@@ -1,43 +1,51 @@
-verify("receives keystrokes from bound input", function(){
+describe("TextBuffer", function(){
 
-    var buffer = new TextBuffer( document, "div" );
-    var keyboard = new KeyboardInput( buffer.element );
+    describe("events", function(){
 
-    keyboard.typeKeys( "hello world" );
+	it("receives keystrokes from bound input", function(){
 
-    assert.areEquivalent( "hello world", buffer.print() );
-});
+	    var buffer = new TextBuffer( document, "div" );
+	    var keyboard = new KeyboardInput( buffer.element );
 
+	    keyboard.typeKeys( "hello world" );
 
-verify("flushes when condition met", function(){
+	    assert.equal( "hello world", buffer.print() );
+	});
+    });
 
-    var buffer = new TextBuffer( document, "div" );
-    var keyboard = new KeyboardInput( buffer.element );
+    describe("flush", function(){
 
-    var result = [];
+	it("happens when condition met", function(){
 
-    var onSpace = function( contents ){
+	    var buffer = new TextBuffer( document, "div" );
+	    var keyboard = new KeyboardInput( buffer.element );
 
-	return contents.slice(-1)[0].charEquals( " " );
-    };
+	    var result = [];
 
-    var pushWord = function( contents ){
+	    var onSpace = function( contents ){
 
-	var tokenLength = contents.length -1;
+		return contents.slice(-1)[0].charEquals( " " );
+	    };
 
-	var token = [];
-	for( var ix = 0; ix < tokenLength; ++ix ){
+	    var pushWord = function( contents ){
 
-	    token.push( contents[ix].keyValue );
-	}
+		var tokenLength = contents.length -1;
 
-	result.push( token.join("") );
-    };
+		var token = [];
+		for( var ix = 0; ix < tokenLength; ++ix ){
 
-    buffer.onFlush( pushWord, onSpace );
+		    token.push( contents[ix].keyValue );
+		}
 
-    keyboard.typeKeys( "hello world " );
+		result.push( token.join("") );
+	    };
 
-    assert.areIdentical( "hello", result[0] );
-    assert.areIdentical( "world", result[1] );
+	    buffer.onFlush( pushWord, onSpace );
+
+	    keyboard.typeKeys( "hello world " );
+
+	    assert.equal( "hello", result[0] );
+	    assert.equal( "world", result[1] );
+	});
+    });
 });

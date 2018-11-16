@@ -1,10 +1,16 @@
 
-verify('on click, highlight Lexeme.', function() {
+describe("Lexeme", function(){
 
-    var lex = new Lexeme('foo').render();
+    describe("on click", function(){
 
-    lex.click();
+	it("highlights", function(){
 
-    assert.isTrue(
-	lex.classList.contains( "relationForming" ) );
+	    var lex = new Lexeme('foo').render();
+
+	    lex.click();
+
+	    assert.isTrue(
+		lex.classList.contains( "relationForming" ) );
+	});
+    });
 });
