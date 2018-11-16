@@ -14,9 +14,14 @@ fileSelector.addEventListener(
 	fileReader.onload = function( event ){
 
 	    var contents = event.target.result;
-	    var fileText = document.createTextNode( contents );
 
-	    outputDiv.appendChild( fileText );
+	    var lexemes = contents.split(' ');
+
+	    for( var ix = 0; ix < lexemes.length; ++ix ){
+
+		outputDiv.appendChild(
+		    new Lexeme( lexemes[ix] ).render() );
+	    }
 	};
 
 	fileReader.readAsText( selectedFile );
