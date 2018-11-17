@@ -9,7 +9,8 @@ describe("Lexeme", function(){
 	    lex.click();
 
 	    assert.isTrue(
-		lex.classList.contains( "relationForming" ) );
+		lex.classList.contains(
+		    LexemeState.Clicked ) );
 	});
     });
 });

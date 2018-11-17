@@ -1,8 +1,20 @@
+var LexemeState = {
+
+    "Unfocused": "unfocused",
+
+    "Clicked": "clickhighlight",
+
+    "SubjectFocus": "subjectfocus",
+    "ObjectFocus": "objectfocus",
+    "RelationFocus": "relationfocus",
+};
+
 class Lexeme{
 
     constructor(text){
 
 	this.text = text;
+	this.viewState = LexemeState.Unfocused;
     }
 
     render(){
@@ -15,9 +27,9 @@ class Lexeme{
 
 	textSpan.appendChild(displayText);
 
-	textSpan.addEventListener("click", function(event){
+	textSpan.addEventListener("click", event => {
 
-	    event.target.classList.toggle("relationForming");
+	    textSpan.classList.toggle( LexemeState.Clicked  );
 	});
 
 	return textSpan;
