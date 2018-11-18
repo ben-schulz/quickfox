@@ -7,3 +7,8 @@ span{
 
     background-color: #ffe683;
 }
+
+.unfocused{
+
+    background-color: transparent;
+}
