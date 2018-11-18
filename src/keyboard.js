@@ -10,6 +10,7 @@ class Key{
 	this.keyValue = key;
 
 	this.isBackspace = key === "Backspace";
+	this.isEscape = key === "Escape";
     }
 }
 

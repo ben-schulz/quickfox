@@ -7,6 +7,14 @@ var LexemeState = {
     "SubjectFocus": "subjectfocus",
     "ObjectFocus": "objectfocus",
     "RelationFocus": "relationfocus",
+
+    "HighlightedStates": [
+
+	this.Clicked,
+	this.SubjectFocus,
+	this.ObjectFocus,
+	this.RelationFocus
+    ]
 };
 
 class Lexeme{
@@ -32,6 +40,19 @@ class Lexeme{
 	    textSpan.classList.toggle( LexemeState.Clicked  );
 	});
 
+
+	textSpan.addEventListener(
+	    "clearHighlights", event => {
+
+		LexemeState.HighlightedStates
+		    .forEach( state => {
+
+			textSpan.classList.remove( state );
+		    });
+						       
+		textSpan.classList.add( LexemeState.Unfocused );
+	    });
+	
 	return textSpan;
     }
 }
