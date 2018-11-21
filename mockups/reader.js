@@ -20,7 +20,7 @@ fileSelector.addEventListener(
 	    for( var ix = 0; ix < lexemes.length; ++ix ){
 
 		outputDiv.appendChild(
-		    new Lexeme( lexemes[ix] ).render() );
+		    new Lexeme( lexemes[ix] ).element );
 	    }
 
 	    var onEscape = function( contents ){

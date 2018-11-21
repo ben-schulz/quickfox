@@ -19,13 +19,7 @@ var LexemeState = {
 
 class Lexeme{
 
-    constructor(text){
-
-	this.text = text;
-	this.viewState = LexemeState.Unfocused;
-    }
-
-    render(){
+    _render(){
 
 	var displayText = document.createTextNode(this.text);
 	var textSpan = document.createElement("span");
@@ -49,10 +43,19 @@ class Lexeme{
 
 			textSpan.classList.remove( state );
 		    });
-						       
+		
 		textSpan.classList.add( LexemeState.Unfocused );
 	    });
 	
 	return textSpan;
+    }
+
+
+    constructor(text){
+
+	this.text = text;
+	this.viewState = LexemeState.Unfocused;
+
+	this.element = this._render();
     }
 }

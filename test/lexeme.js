@@ -11,7 +11,7 @@ describe( "Lexeme", function(){
 
 	it( "highlights", function(){
 
-	    var lex = new Lexeme( "foo" ).render();
+	    var lex = new Lexeme( "foo" ).element;
 
 	    lex.click();
 
@@ -48,13 +48,13 @@ describe( "Lexeme", function(){
 	    var keyboard = new KeyboardInput( buffer.element );
 
 	    var highlight0 = page.appendChild(
-		new Lexeme( "foo" ).render() );
+		new Lexeme( "foo" ).element );
 
 	    var highlight1 = page.appendChild(
-		new Lexeme( "bar" ).render() );
+		new Lexeme( "bar" ).element );
 
 	    var noHighlight = page.appendChild(
-		new Lexeme( "cat" ).render() );
+		new Lexeme( "cat" ).element );
 
 	    highlight0.click();
 	    highlight1.click();

@@ -11,6 +11,6 @@ class TextCanvas{
 
     addLexeme( lex ){
 
-	this.element.appendChild( lex.render() );
+	this.element.appendChild( lex.element );
     }
 }

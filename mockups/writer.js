@@ -29,7 +29,7 @@ var writeText = contents => {
     }
 
     canvas.appendChild(
-	new Lexeme( token.join( "" ) ).render() );
+	new Lexeme( token.join( "" ) ).element );
 };
 
 buffer.onFlush( writeText, onSpace );
