@@ -21,6 +21,10 @@ class TextCanvas{
 		});
 
 		this.highlights = [];
+
+		this.hasSubject = false;
+		this.hasObject = false;
+		this.hasRelation = false;
 	});
 
 	this.element.addEventListener(

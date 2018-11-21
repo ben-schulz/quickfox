@@ -89,6 +89,9 @@ describe( "TextCanvas", function(){
 	    canvas.addLexeme( noHighlight );
 
 	    highlight0.element.click();
+	    highlight0.element.click();
+
+	    highlight1.element.click();
 	    highlight1.element.click();
 
 	    canvas.element.dispatchEvent(
@@ -98,6 +101,10 @@ describe( "TextCanvas", function(){
 	    assertUnfocused( highlight0 );
 	    assertUnfocused( highlight1 );
 	    assertUnfocused( noHighlight );
+
+	    assert.isFalse( canvas.hasSubject );
+	    assert.isFalse( canvas.hasObject );
+	    assert.isFalse( canvas.hasRelation );
 	});
 
     });
