@@ -19,6 +19,18 @@ var LexemeState = {
 
 class Lexeme{
 
+    clearHighlights(){
+
+	LexemeState.HighlightedStates
+	    .forEach( state => {
+
+		this.element.classList.remove( state );
+	    });
+
+	this.element.classList.add( LexemeState.Unfocused );
+    }
+
+
     _render(){
 
 	var displayText = document.createTextNode(this.text);
@@ -35,21 +47,8 @@ class Lexeme{
 	});
 
 
-	textSpan.addEventListener(
-	    "clearHighlights", event => {
-
-		LexemeState.HighlightedStates
-		    .forEach( state => {
-
-			textSpan.classList.remove( state );
-		    });
-		
-		textSpan.classList.add( LexemeState.Unfocused );
-	    });
-	
 	return textSpan;
     }
-
 
     constructor(text){
 
@@ -57,5 +56,9 @@ class Lexeme{
 	this.viewState = LexemeState.Unfocused;
 
 	this.element = this._render();
+
+	this.element.addEventListener(
+	    "clearHighlights", event => this.clearHighlights());
+
     }
 }
