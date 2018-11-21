@@ -20,6 +20,12 @@ var LexemeState = {
 
 class Lexeme{
 
+    highlightClick(){
+
+	this.element.classList.remove( LexemeState.Unfocused  );
+	this.element.classList.toggle( LexemeState.Clicked  );
+    }
+
     clearHighlights(){
 
 	LexemeState.HighlightedStates
@@ -34,33 +40,19 @@ class Lexeme{
 
     _render(){
 
-	var displayText = document.createTextNode(this.text);
-	var textSpan = document.createElement("span");
+	var displayText = document.createTextNode( this.text );
+	var textSpan = document.createElement( "span" );
 
 	textSpan.classList.add( LexemeState.Unfocused );
 	textSpan.value = this.text;
 
-	textSpan.appendChild(displayText);
-
-	textSpan.addEventListener("click", event => {
-
-	    textSpan.classList.toggle( LexemeState.Clicked  );
-
-	    var highlightEvent =
-		new CustomEvent( "lexemeHighlighted", {
-
-		    "bubbles": true,
-		    "detail": { "target": this }
-		});
-
-	    textSpan.dispatchEvent( highlightEvent );
-	});
+	textSpan.appendChild( displayText );
 
 	return textSpan;
     }
 
 
-    constructor(text){
+    constructor( text ){
 
 	this.text = text;
 	this.viewState = LexemeState.Unfocused;
@@ -68,6 +60,20 @@ class Lexeme{
 	this.element = this._render();
 
 	this.element.addEventListener(
-	    "clearHighlights", event => this.clearHighlights());
+	    "clearHighlights", this.clearHighlights );
+
+	this.element.addEventListener(
+	    "click", event => {
+
+		this.highlightClick();
+
+		this.element.dispatchEvent(
+		    new CustomEvent( "lexemeHighlighted", {
+
+			"bubbles": true,
+			"detail": { "target": this } } )
+		);
+
+	    });
     }
 }

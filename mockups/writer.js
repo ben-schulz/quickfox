@@ -1,7 +1,11 @@
 var buffer = new TextBuffer( document, "div" );
 var keyboard = new KeyboardInput( buffer.element );
 
-var canvas = document.getElementById( "textCanvasDemo" );
+//var canvas = document.getElementById( "textCanvasDemo" );
+
+var canvas = new TextCanvas( document );
+
+document.body.appendChild( canvas );
 
 var onSpace = contents => {
 
@@ -28,8 +32,8 @@ var writeText = contents => {
 	}
     }
 
-    canvas.appendChild(
-	new Lexeme( token.join( "" ) ).element );
+    canvas.addLexeme(
+	new Lexeme( token.join( "" ) ) );
 };
 
 buffer.onFlush( writeText, onSpace );
