@@ -3,12 +3,27 @@ span{
     padding: 2pt;
 }
 
+.unfocused{
+
+    background-color: transparent;
+}
+
 .clickhighlight{
 
     background-color: #ffe683;
 }
 
-.unfocused{
+.subjectfocus{
 
-    background-color: transparent;
+    background-color: #db6f59;
+}
+
+.objectfocus{
+
+    background-color: #5991db;
+}
+
+.relationfocus{
+
+    background-color: #69b56c;
 }

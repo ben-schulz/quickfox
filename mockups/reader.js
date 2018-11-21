@@ -6,8 +6,10 @@ fileSelector.addEventListener(
 
 	var selectedFile = fileSelector.files[0];
 
-	var outputDiv =
-	    document.getElementById( "fileContents" );
+	var canvas = new TextCanvas( document );
+	var outputDiv = canvas.element;
+
+	document.body.appendChild( outputDiv );
 
 	var fileReader = new FileReader();
 
@@ -19,8 +21,8 @@ fileSelector.addEventListener(
 
 	    for( var ix = 0; ix < lexemes.length; ++ix ){
 
-		outputDiv.appendChild(
-		    new Lexeme( lexemes[ix] ).element );
+		canvas.addLexeme(
+		    new Lexeme( lexemes[ix] ) );
 	    }
 
 	    var onEscape = function( contents ){
@@ -33,8 +35,7 @@ fileSelector.addEventListener(
 		var event = new CustomEvent(
 		    "clearHighlights" );
 
-		outputDiv.childNodes.forEach(
-		    node => node.dispatchEvent( event ) )
+		canvas.element.dispatchEvent( event );
 	    };
 
 	    var buffer = new TextBuffer( document, "div" );
