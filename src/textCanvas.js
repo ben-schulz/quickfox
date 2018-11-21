@@ -8,6 +8,10 @@ class TextCanvas{
 
 	this.highlights = [];
 
+	this.hasSubject = false;
+	this.hasObject = false;
+	this.hasRelation = false;
+
 	this.element.addEventListener(
 	    "clearHighlights", event => {
 
@@ -22,7 +26,13 @@ class TextCanvas{
 	this.element.addEventListener(
 	    "lexemeHighlighted", event =>{
 
-		this.highlights.push( event.detail.target );
+		var lex = event.detail.target;
+		
+		this.highlights.push( lex );
+
+		this.hasObject = lex.isObject;
+		this.hasSubject = lex.isSubject;
+		this.hasRelation = lex.isRelation;
 	});
     }
 

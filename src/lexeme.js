@@ -82,6 +82,20 @@ class Lexeme{
 	this._showState( LexemeState.Unfocused );
     }
 
+    get isObject(){
+
+	return this.viewState === LexemeState.ObjectFocus;
+    }
+
+    get isSubject(){
+
+	return this.viewState === LexemeState.SubjectFocus;
+    }
+
+    get isRelation(){
+
+	return this.viewState === LexemeState.RelationFocus;
+    }
 
     _render(){
 
