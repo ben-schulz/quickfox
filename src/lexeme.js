@@ -70,6 +70,11 @@ class Lexeme{
 	this._showState( LexemeState.Unfocused );
     }
 
+    get isUnfocused(){
+
+	return this.viewState === LexemeState.Unfocused;
+    }
+
     get isObject(){
 
 	return this.viewState === LexemeState.ObjectFocus;
