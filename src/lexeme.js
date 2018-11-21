@@ -17,6 +17,7 @@ var LexemeState = {
     ]
 };
 
+
 class Lexeme{
 
     clearHighlights(){
@@ -46,9 +47,9 @@ class Lexeme{
 	    textSpan.classList.toggle( LexemeState.Clicked  );
 	});
 
-
 	return textSpan;
     }
+
 
     constructor(text){
 
@@ -59,6 +60,5 @@ class Lexeme{
 
 	this.element.addEventListener(
 	    "clearHighlights", event => this.clearHighlights());
-
     }
 }

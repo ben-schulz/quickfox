@@ -1,3 +1,10 @@
+var assertUnfocused = function( lexeme ){
+
+    assert.isTrue(
+	lexeme.element
+	    .classList.contains( LexemeState.Unfocused ) );
+};
+
 describe( "TextCanvas", function(){
 
     describe( "rendered element", function(){
@@ -18,4 +25,33 @@ describe( "TextCanvas", function(){
 	    assert.equal( "world", secondChild.textContent );
 	});
     });
+
+    describe( "on clearHighlights raised", function(){
+
+	it( "lexeme styles reset", function(){
+
+	    var canvas = new TextCanvas( document );
+
+	    var highlight0 = new Lexeme( "foo" );
+	    var highlight1 = new Lexeme( "bar" );
+	    var noHighlight = new Lexeme( "cat" );
+
+	    canvas.addLexeme( highlight0 );
+	    canvas.addLexeme( highlight1 );
+	    canvas.addLexeme( noHighlight );
+
+	    highlight0.element.click();
+	    highlight1.element.click();
+
+	    canvas.element.dispatchEvent(
+		new CustomEvent( "clearHighlights" )
+	    );
+
+	    assertUnfocused( highlight0 );
+	    assertUnfocused( highlight1 );
+	    assertUnfocused( noHighlight );
+	});
+
+    });
+
 });
