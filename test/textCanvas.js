@@ -26,9 +26,9 @@ describe( "TextCanvas", function(){
 	});
     });
 
-    describe( "on clearHighlights raised", function(){
+    describe( "clearHighlights event", function(){
 
-	it( "lexeme styles reset", function(){
+	it( "resets lexeme styles", function(){
 
 	    var canvas = new TextCanvas( document );
 
