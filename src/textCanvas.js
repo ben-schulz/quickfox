@@ -1,3 +1,39 @@
+var TripleComponent = (function(){
+
+    var components = {
+
+	"Subject": "tripleSubject",
+	"Object": "tripleObject",
+	"Relation": "tripleRelation",
+    };
+
+    return {
+
+	"Subject": components.Subject,
+	"Object": components.Object,
+	"Relation": components.Relation,
+
+	"toLexemeState": function( x ){
+
+	    if( x === components.Subject ){
+
+		return LexemeState.SubjectFocus;
+	    }
+
+	    if( x === components.Object ){
+
+		return LexemeState.ObjectFocus;
+	    }
+
+	    if( x === components.Relation ){
+
+		return LexemeState.RelationFocus;
+	    }
+	}
+    };
+
+})();
+
 class TripleState{
 
     clear(){
