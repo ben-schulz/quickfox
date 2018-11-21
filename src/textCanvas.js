@@ -43,6 +43,30 @@ class TripleState{
 	this.hasRelation = false;
     }
 
+
+    fillNext(){
+
+	if( !this.hasSubject ){
+
+	    this.hasSubject = true;
+	    return TripleComponent.Subject;
+	}
+
+	if( !this.hasObject ){
+
+	    this.hasObject = true;
+	    return TripleComponent.Object;
+	}
+
+	if( !this.hasRelation ){
+
+	    this.hasRelation = true;
+	    return TripleComponent.Relation;
+	}
+
+	return null;
+    }
+
     constructor(){
 
 	this.clear();
