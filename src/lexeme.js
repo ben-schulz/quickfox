@@ -37,7 +37,7 @@ class Lexeme{
 	var displayText = document.createTextNode(this.text);
 	var textSpan = document.createElement("span");
 
-	textSpan.className = "lexeme";
+	textSpan.classList.add( LexemeState.Unfocused );
 	textSpan.value = this.text;
 
 	textSpan.appendChild(displayText);
@@ -45,6 +45,15 @@ class Lexeme{
 	textSpan.addEventListener("click", event => {
 
 	    textSpan.classList.toggle( LexemeState.Clicked  );
+
+	    var highlightEvent =
+		new CustomEvent( "lexemeHighlighted", {
+
+		    "bubbles": true,
+		    "detail": { "target": this }
+		});
+
+	    textSpan.dispatchEvent( highlightEvent );
 	});
 
 	return textSpan;

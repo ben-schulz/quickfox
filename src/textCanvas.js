@@ -6,23 +6,28 @@ class TextCanvas{
 	this.element = document.createElement(
 	    this.elementType );
 
-	this.lexemes = [];
+	this.highlights = [];
 
 	this.element.addEventListener(
 	    "clearHighlights", event => {
 
-		this.lexemes.forEach( lex => {
+		this.highlights.forEach( lex => {
 
 		    lex.clearHighlights();
 		});
 
-		this.lexemes = [];
+		this.highlights = [];
+	});
+
+	this.element.addEventListener(
+	    "lexemeHighlighted", event =>{
+
+		this.highlights.push( event.detail.target );
 	});
     }
 
     addLexeme( lex ){
 
-	this.lexemes.push( lex );
 	this.element.appendChild( lex.element );
     }
 }
