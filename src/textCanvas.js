@@ -130,33 +130,21 @@ class TextCanvas{
 	this.element.addEventListener(
 	    "lexemeHighlighted", event => {
 
+		var next = this.tripleState.fillNext();
 		var lex = event.detail.target;
-		
+
+		if( null === next ){
+
+		    lex.clearHighlights();
+		    return;
+		}
+
 		this.highlights.push( lex );
 
-		if( this.hasSubject && lex.isSubject ){
+		lex._setState(
+		    TripleComponent.toLexemeState( next ) );
 
-		    lex._setNextState();
-		}
-
-		if( this.hasObject && lex.isObject ){
-
-		    lex._setNextState();
-		}
-
-		if( this.hasRelation && lex.isRelation ){
-
-		    lex._setNextState();
-		}
-
-		this.hasSubject =
-		    lex.isSubject || this.hasSubject;
-
-		this.hasObject =
-		    lex.isObject || this.hasObject;
-
-		this.hasRelation =
-		    lex.isRelation || this.hasRelation;
+		lex._showState( TripleComponent.toLexemeState( next ) );
 	});
     }
 

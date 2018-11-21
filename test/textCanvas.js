@@ -2,7 +2,9 @@ var assertLexemeState = function( lexeme, state ){
 
     assert.isTrue(
 	lexeme.element
-	    .classList.contains( state ) );
+	    .classList.contains( state ),
+
+	"expected '" + state + "' in classList." );
 };
 
 var assertUnfocused = function( lexeme ){
@@ -58,15 +60,18 @@ describe( "TextCanvas", function(){
 
 	    lex.element.click();
 	    assertSubjectFocused( lex );
-	    assert.isTrue( canvas.hasSubject );
+	    assert.isTrue( canvas.hasSubject,
+			 "expected 'hasSubject' true");
 
 	    lex.element.click();
 	    assertObjectFocused( lex );
-	    assert.isTrue( canvas.hasObject );
+	    assert.isTrue( canvas.hasObject,
+			 "expected 'hasObject' true");
 
 	    lex.element.click();
 	    assertRelationFocused( lex );
-	    assert.isTrue( canvas.hasRelation );
+	    assert.isTrue( canvas.hasRelation,
+			   "expected 'hasRelation' true");
 
 	    assert.notEqual( null, canvas.highlights[0] );
 	});
