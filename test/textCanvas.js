@@ -55,7 +55,6 @@ describe( "TextCanvas", function(){
 
 	    var canvas = new TextCanvas( document );
 	    var lex = new Lexeme( "foo" );
-
 	    canvas.addLexeme( lex );
 
 	    lex.element.click();
@@ -89,6 +88,34 @@ describe( "TextCanvas", function(){
 	    lex1.element.click();
 
 	    assert.notEqual( lex0.viewState, lex1.viewState );
+	});
+
+
+	it( "clears current if all selected", function(){
+
+	    var canvas = new TextCanvas( document );
+	    var lex0 = new Lexeme( "foo" );
+	    var lex1 = new Lexeme( "bar" );
+	    var lex2 = new Lexeme( "blah" );
+
+	    var lex3 = new Lexeme( "cat" );
+
+	    canvas.addLexeme( lex0 );
+	    canvas.addLexeme( lex1 );
+	    canvas.addLexeme( lex2 );
+	    canvas.addLexeme( lex3 );
+
+	    lex0.element.click();
+	    lex1.element.click();
+
+	    lex2.element.click();
+	    assertRelationFocused( lex2 );
+
+	    lex2.element.click();
+	    assertUnfocused( lex2 );
+
+	    lex3.element.click();
+	    assertRelationFocused( lex3 );
 	});
     });
 

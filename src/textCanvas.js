@@ -67,6 +67,27 @@ class TripleState{
 	return null;
     }
 
+    vacateLast(){
+
+	if( this.hasRelation ){
+
+	    this.hasRelation = false;
+	    return;
+	}
+
+	if( this.hasObject ){
+
+	    this.hasObject = false;
+	    return;
+	}
+
+	if( this.hasSubject ){
+
+	    this.hasSubject = false;
+	    return;
+	}
+    }
+
     constructor(){
 
 	this.clear();
@@ -136,6 +157,8 @@ class TextCanvas{
 		if( null === next ){
 
 		    lex.clearHighlights();
+		    this.tripleState.vacateLast();
+
 		    return;
 		}
 
