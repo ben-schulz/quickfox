@@ -54,26 +54,32 @@ describe( "TextCanvas", function(){
 	it( "populates each state in order", function(){
 
 	    var canvas = new TextCanvas( document );
-	    var lex = new Lexeme( "foo" );
-	    canvas.addLexeme( lex );
+	    var lex0 = new Lexeme( "foo" );
+	    var lex1 = new Lexeme( "bar" );
+	    var lex2 = new Lexeme( "cat" );
 
-	    lex.element.click();
-	    assertSubjectFocused( lex );
+	    canvas.addLexeme( lex0 );
+	    canvas.addLexeme( lex1 );
+	    canvas.addLexeme( lex2 );
+
+	    lex0.element.click();
+	    assertSubjectFocused( lex0 );
 	    assert.isTrue( canvas.hasSubject,
 			 "expected 'hasSubject' true");
 
-	    lex.element.click();
-	    assertObjectFocused( lex );
+	    lex1.element.click();
+	    assertObjectFocused( lex1 );
 	    assert.isTrue( canvas.hasObject,
 			 "expected 'hasObject' true");
 
-	    lex.element.click();
-	    assertRelationFocused( lex );
+	    lex2.element.click();
+	    assertRelationFocused( lex2 );
 	    assert.isTrue( canvas.hasRelation,
 			   "expected 'hasRelation' true");
 
 	    assert.notEqual( null, canvas.highlights[0] );
 	});
+
 
 	it( "skips states already set", function(){
 
@@ -116,6 +122,24 @@ describe( "TextCanvas", function(){
 
 	    lex3.element.click();
 	    assertRelationFocused( lex3 );
+	});
+
+	it( "clears current if already highlighted", function(){
+
+	    var canvas = new TextCanvas( document );
+	    var lex0 = new Lexeme( "foo" );
+	    var lex1 = new Lexeme( "bar" );
+
+	    canvas.addLexeme( lex0 );
+	    canvas.addLexeme( lex1 );
+
+	    lex0.element.click();
+	    lex1.element.click();
+
+	    assertObjectFocused( lex1 );
+
+	    lex1.element.click();
+	    assertUnfocused( lex1 );
 	});
     });
 

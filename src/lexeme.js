@@ -125,8 +125,6 @@ class Lexeme{
 	this.element.addEventListener(
 	    "click", event => {
 
-		this._setNextState();
-
 		this.element.dispatchEvent(
 		    new CustomEvent( "lexemeHighlighted", {
 

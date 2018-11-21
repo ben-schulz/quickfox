@@ -162,6 +162,14 @@ class TextCanvas{
 		    return;
 		}
 
+		if( lex.isFocused ){
+
+		    lex.clearHighlights();
+		    this.tripleState.vacateLast();
+
+		    return;
+		}
+
 		this.highlights.push( lex );
 
 		lex._setState(
