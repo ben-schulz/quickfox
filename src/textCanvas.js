@@ -1,4 +1,49 @@
+class TripleState{
+
+    clear(){
+
+	this.hasSubject = false;
+	this.hasObject = false;
+	this.hasRelation = false;
+    }
+
+    constructor(){
+
+	this.clear();
+    }
+}
+
 class TextCanvas{
+
+    get hasSubject(){
+
+	return this.tripleState.hasSubject;
+    }
+
+    set hasSubject( boolValue ){
+
+	this.tripleState.hasSubject = boolValue;
+    }
+
+    get hasObject(){
+
+	return this.tripleState.hasObject;
+    }
+
+    set hasObject( boolValue ){
+
+	this.tripleState.hasObject = boolValue;
+    }
+
+    get hasRelation(){
+
+	return this.tripleState.hasRelation;
+    }
+
+    set hasRelation( boolValue ){
+
+	this.tripleState.hasRelation = boolValue;
+    }
 
     constructor( document ){
 
@@ -8,9 +53,7 @@ class TextCanvas{
 
 	this.highlights = [];
 
-	this.hasSubject = false;
-	this.hasObject = false;
-	this.hasRelation = false;
+	this.tripleState = new TripleState();
 
 	this.element.addEventListener(
 	    "clearHighlights", event => {
@@ -21,10 +64,7 @@ class TextCanvas{
 		});
 
 		this.highlights = [];
-
-		this.hasSubject = false;
-		this.hasObject = false;
-		this.hasRelation = false;
+		this.tripleState.clear();
 	});
 
 	this.element.addEventListener(
