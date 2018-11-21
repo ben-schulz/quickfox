@@ -28,15 +28,35 @@ class TextCanvas{
 	});
 
 	this.element.addEventListener(
-	    "lexemeHighlighted", event =>{
+	    "lexemeHighlighted", event => {
 
 		var lex = event.detail.target;
 		
 		this.highlights.push( lex );
 
-		this.hasObject = lex.isObject;
-		this.hasSubject = lex.isSubject;
-		this.hasRelation = lex.isRelation;
+		if( this.hasSubject && lex.isSubject ){
+
+		    lex._setNextState();
+		}
+
+		if( this.hasObject && lex.isObject ){
+
+		    lex._setNextState();
+		}
+
+		if( this.hasRelation && lex.isRelation ){
+
+		    lex._setNextState();
+		}
+
+		this.hasSubject =
+		    lex.isSubject || this.hasSubject;
+
+		this.hasObject =
+		    lex.isObject || this.hasObject;
+
+		this.hasRelation =
+		    lex.isRelation || this.hasRelation;
 	});
     }
 

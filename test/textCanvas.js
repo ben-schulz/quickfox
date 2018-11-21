@@ -70,6 +70,21 @@ describe( "TextCanvas", function(){
 
 	    assert.notEqual( null, canvas.highlights[0] );
 	});
+
+	it( "skips states already set", function(){
+
+	    var canvas = new TextCanvas( document );
+	    var lex0 = new Lexeme( "foo" );
+	    var lex1 = new Lexeme( "bar" );
+
+	    canvas.addLexeme( lex0 );
+	    canvas.addLexeme( lex1 );
+
+	    lex0.element.click();
+	    lex1.element.click();
+
+	    assert.notEqual( lex0.viewState, lex1.viewState );
+	});
     });
 
     describe( "clearHighlights event", function(){
