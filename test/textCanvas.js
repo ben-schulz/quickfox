@@ -57,9 +57,6 @@ describe( "TextCanvas", function(){
 	    canvas.addLexeme( lex );
 
 	    lex.element.click();
-	    assert.notEqual( null, canvas.highlights[0] );
-
-	    lex.element.click();
 	    assertSubjectFocused( lex );
 	    assert.isTrue( canvas.hasSubject );
 
@@ -71,6 +68,7 @@ describe( "TextCanvas", function(){
 	    assertRelationFocused( lex );
 	    assert.isTrue( canvas.hasRelation );
 
+	    assert.notEqual( null, canvas.highlights[0] );
 	});
     });
 

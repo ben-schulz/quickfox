@@ -3,8 +3,6 @@ var LexemeState = (function() {
     var states = {
 	"Unfocused": "unfocused",
 
-	"Clicked": "clickhighlight",
-
 	"SubjectFocus": "subjectfocus",
 	"ObjectFocus": "objectfocus",
 	"RelationFocus": "relationfocus",
@@ -14,15 +12,12 @@ var LexemeState = (function() {
 
 	"Unfocused": states.Unfocused,
 
-	"Clicked": states.Clicked,
-
 	"SubjectFocus": states.SubjectFocus,
 	"ObjectFocus": states.ObjectFocus,
 	"RelationFocus": states.RelationFocus,
 
 	"All": [
 	    states.Unfocused,
-	    states.Clicked,
 	    states.SubjectFocus,
 	    states.ObjectFocus,
 	    states.RelationFocus,
@@ -30,7 +25,6 @@ var LexemeState = (function() {
 
 	"HighlightedStates": [
 
-	    states.Clicked,
 	    states.SubjectFocus,
 	    states.ObjectFocus,
 	    states.RelationFocus
@@ -68,12 +62,6 @@ class Lexeme{
 	this.viewState = LexemeState.All[ this._stateIndex ];
 
 	this._showState( this.viewState );
-    }
-
-    highlightClick(){
-
-	this._setState( LexemeState.Clicked );
-	this._showState( LexemeState.Clicked );
     }
 
     clearHighlights(){

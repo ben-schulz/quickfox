@@ -10,7 +10,7 @@ describe( "Lexeme", function(){
 
 	    assert.isTrue(
 		lex.classList.contains(
-		    LexemeState.Clicked ) );
+		    LexemeState.All[1] ) );
 	});
 
 	it( "advances to next state in sequence", function(){
