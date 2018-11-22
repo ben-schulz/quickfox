@@ -164,10 +164,17 @@ class TextCanvas{
 	this.element.addEventListener(
 	    "lexemeHighlighted", event => {
 
-		var next = this.tripleState.fillNext();
 		var lex = event.detail.target;
+		if( lex.isFocused ){
 
-		if( lex.isFocused || null === next ){
+		    lex.clearHighlights();
+		    this.tripleState.vacateLast();
+		    return;
+		}
+
+		var next = this.tripleState.fillNext();
+
+		if( null === next ){
 
 		    lex.clearHighlights();
 		    this.tripleState.vacateLast();

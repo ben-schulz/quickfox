@@ -218,6 +218,29 @@ describe( "TextCanvas", function(){
 	    assert.isFalse( canvas.hasRelation );
 	});
 
+
+	it( "highlights last cleared", function(){
+
+	    var canvas = new TextCanvas( document );
+	    var lex0 = new Lexeme( "foo" );
+	    var lex1 = new Lexeme( "bar" );
+	    var lex2 = new Lexeme( "cat" );
+
+	    canvas.addLexeme( lex0 );
+	    canvas.addLexeme( lex1 );
+	    canvas.addLexeme( lex2 );
+
+	    lex0.element.click();
+
+	    lex1.element.click();
+	    lex1.element.click();
+
+	    lex2.element.click();
+
+	    assertUnfocused( lex1 );
+	    assertObjectFocused( lex2 );
+
+	});
     });
 
 });
