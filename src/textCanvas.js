@@ -41,51 +41,64 @@ class TripleState{
 	this.hasSubject = false;
 	this.hasObject = false;
 	this.hasRelation = false;
+
+	this.vacant = [
+
+	    TripleComponent.Relation,
+	    TripleComponent.Object,
+	    TripleComponent.Subject,
+	];
+
+	this.filled = [];
     }
 
 
     fillNext(){
 
-	if( !this.hasSubject ){
+	if( 1 > this.vacant.length ){
 
-	    this.hasSubject = true;
-	    return TripleComponent.Subject;
+	    return null;
 	}
 
-	if( !this.hasObject ){
+	var next = this.vacant.pop();
+	this.filled.push( next );
 
-	    this.hasObject = true;
-	    return TripleComponent.Object;
-	}
+	this.hasSubject = (
+	    this.hasSubject
+		|| next === TripleComponent.Subject );
 
-	if( !this.hasRelation ){
+	this.hasObject = (
+	    this.hasObject
+		|| next === TripleComponent.Object );
 
-	    this.hasRelation = true;
-	    return TripleComponent.Relation;
-	}
+	this.hasRelation = (
+	    this.hasRelation
+		|| next === TripleComponent.Relation );
 
-	return null;
+	return next;
     }
 
     vacateLast(){
 
-	if( this.hasRelation ){
+	if( 1 > this.filled.length ){
 
-	    this.hasRelation = false;
 	    return;
 	}
 
-	if( this.hasObject ){
+	var last = this.filled.pop();
+	this.vacant.push( last );
 
-	    this.hasObject = false;
-	    return;
-	}
+	this.hasSubject = (
+	    this.hasSubject
+		&& TripleComponent.Subject !== last )
 
-	if( this.hasSubject ){
+	this.hasObject = (
+	    this.hasObject
+		&& TripleComponent.Object !== last )
 
-	    this.hasSubject = false;
-	    return;
-	}
+	this.hasRelation = (
+	    this.hasRelation
+		&& TripleComponent.Relation !== last )
     }
 
     constructor(){

@@ -49,6 +49,47 @@ describe( "TextCanvas", function(){
 	});
     });
 
+    describe( "TripleState", function(){
+
+	describe( "fillNext", function(){
+
+	    it( "fills states in order", function(){
+
+		var state = new TripleState();
+
+		var first = state.fillNext();
+
+		assert.isTrue( state.hasSubject );
+		assert.equal( first, TripleComponent.Subject );
+
+		var second = state.fillNext();
+
+		assert.isTrue( state.hasObject );
+		assert.equal( second, TripleComponent.Object );
+
+		var third = state.fillNext();
+
+		assert.isTrue( state.hasRelation );
+		assert.equal( third, TripleComponent.Relation );
+	    });
+
+	    it( "inverts 'vacateLast'", function(){
+
+		var state = new TripleState();
+
+		var preCondition = state.fillNext();
+
+		state.vacateLast();
+
+		var postCondition = state.fillNext();
+
+		assert.equal( preCondition, postCondition );
+	    });
+	});
+
+
+    });
+
     describe( "lexemeHighlighted event", function(){
 
 	it( "populates each state in order", function(){
@@ -141,6 +182,7 @@ describe( "TextCanvas", function(){
 	    lex1.element.click();
 	    assertUnfocused( lex1 );
 	});
+
     });
 
     describe( "clearHighlights event", function(){
