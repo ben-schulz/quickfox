@@ -154,15 +154,7 @@ class TextCanvas{
 		var next = this.tripleState.fillNext();
 		var lex = event.detail.target;
 
-		if( null === next ){
-
-		    lex.clearHighlights();
-		    this.tripleState.vacateLast();
-
-		    return;
-		}
-
-		if( lex.isFocused ){
+		if( lex.isFocused || null === next ){
 
 		    lex.clearHighlights();
 		    this.tripleState.vacateLast();
