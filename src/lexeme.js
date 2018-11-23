@@ -97,24 +97,24 @@ class Lexeme{
 	return this.viewState === LexemeState.RelationFocus;
     }
 
-    _render(){
-
-	var displayText = document.createTextNode( this.text );
-	var textSpan = document.createElement( "span" );
-
-	textSpan.value = this.text;
-
-	textSpan.appendChild( displayText );
-
-	return textSpan;
-    }
-
-
     constructor( text ){
 
 	this.text = text;
 
-	this.element = this._render();
+	this.element = (function(){
+
+	    var displayText =
+		document.createTextNode( text );
+
+	    var textSpan = document.createElement( "span" );
+
+	    textSpan.value = text;
+
+	    textSpan.appendChild( displayText );
+
+	    return textSpan;
+
+	})();
 
 	this._stateIndex = -1;
 	this._setNextState();
