@@ -258,6 +258,32 @@ describe( "TextCanvas", function(){
 
 	});
 
+	it( "highlights next available", function(){
+
+	    var canvas = new TextCanvas( document );
+	    var subject = new Lexeme( "foo" );
+	    var firstObject = new Lexeme( "bar" );
+	    var relation = new Lexeme( "cat" );
+	    var nextObject = new Lexeme( "gromvin" );
+
+	    canvas.addLexeme( subject );
+	    canvas.addLexeme( firstObject );
+	    canvas.addLexeme( relation );
+	    canvas.addLexeme( nextObject );
+
+	    subject.element.click();
+	    firstObject.element.click();
+	    relation.element.click();
+
+	    firstObject.element.click();
+
+	    nextObject.element.click();
+
+	    assertUnfocused( firstObject );
+	    assertObjectFocused( nextObject );
+
+	});
+
     });
 
     describe( "clearHighlights event", function(){

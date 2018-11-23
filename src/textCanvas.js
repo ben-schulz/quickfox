@@ -205,8 +205,20 @@ class TextCanvas{
 		var lex = event.detail.target;
 		if( lex.isFocused || this.tripleState.isFull ){
 
+		    if( lex.isSubject ){
+
+			this.tripleState.vacateSubject();
+		    }
+		    else if( lex.isObject ){
+
+			this.tripleState.vacateObject();
+		    }
+		    else if( lex.isRelation ){
+
+			this.tripleState.vacateRelation();
+		    }
+
 		    lex.clearHighlights();
-		    this.tripleState.vacateLast();
 		    return;
 		}
 
