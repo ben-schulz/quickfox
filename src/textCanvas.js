@@ -52,6 +52,13 @@ class TripleState{
 	this.filled = [];
     }
 
+    get isFull(){
+
+	return ( this.hasSubject
+		 && this.hasObject
+		 && this.hasRelation );
+    }
+
 
     fillNext(){
 
@@ -196,7 +203,7 @@ class TextCanvas{
 	    "lexemeHighlighted", event => {
 
 		var lex = event.detail.target;
-		if( lex.isFocused ){
+		if( lex.isFocused || this.tripleState.isFull ){
 
 		    lex.clearHighlights();
 		    this.tripleState.vacateLast();
@@ -204,14 +211,6 @@ class TextCanvas{
 		}
 
 		var next = this.tripleState.fillNext();
-
-		if( null === next ){
-
-		    lex.clearHighlights();
-		    this.tripleState.vacateLast();
-
-		    return;
-		}
 
 		this.highlights.push( lex );
 
