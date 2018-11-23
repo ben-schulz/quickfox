@@ -48,9 +48,6 @@ class Lexeme{
     _setState( lexemeState ){
 
 	this.viewState = lexemeState;
-	this._stateIndex = LexemeState.All.find( s => {
-	    return s === lexemeState;
-	});
     }
 
     _setNextState(){
@@ -66,7 +63,7 @@ class Lexeme{
 
     clearHighlights(){
 
-	this._setState( LexemeState.Unfocused );
+	this.viewState = LexemeState.Unfocused;
 	this._showState( LexemeState.Unfocused );
     }
 
@@ -116,8 +113,7 @@ class Lexeme{
 
 	})();
 
-	this._stateIndex = -1;
-	this._setNextState();
+	this.clearHighlights();
 
 	this.element.addEventListener(
 	    "clearHighlights", this.clearHighlights );
