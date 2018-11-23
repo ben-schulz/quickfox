@@ -116,6 +116,7 @@ class TripleState{
     }
 }
 
+
 class TextCanvas{
 
     get hasSubject(){
@@ -148,6 +149,49 @@ class TextCanvas{
 	this.tripleState.hasRelation = boolValue;
     }
 
+    _unfocusLexeme( lex ){
+
+	if( lex.isSubject ){
+
+	    this.tripleState.vacateSubject();
+	}
+	else if( lex.isObject ){
+
+	    this.tripleState.vacateObject();
+	}
+	else if( lex.isRelation ){
+
+	    this.tripleState.vacateRelation();
+	}
+
+	lex.clearHighlights();
+    }
+
+    _focusLexeme( lex ){
+
+	var next = this.tripleState.fillNext();
+
+	this.highlights.push( lex );
+
+	if( next === TripleComponent.Subject ){
+
+	    lex.highlightSubject();
+	    return;
+	}
+
+	if( next === TripleComponent.Object ){
+
+	    lex.highlightObject();
+	    return;
+	}
+
+	if( next === TripleComponent.Relation ){
+
+	    lex.highlightRelation();
+	    return;
+	}
+    }
+
     constructor( document ){
 
 	this.elementType = "div";
@@ -176,44 +220,11 @@ class TextCanvas{
 		var lex = event.detail.target;
 		if( lex.isFocused || this.tripleState.isFull ){
 
-		    if( lex.isSubject ){
-
-			this.tripleState.vacateSubject();
-		    }
-		    else if( lex.isObject ){
-
-			this.tripleState.vacateObject();
-		    }
-		    else if( lex.isRelation ){
-
-			this.tripleState.vacateRelation();
-		    }
-
-		    lex.clearHighlights();
+		    this._unfocusLexeme( lex );
 		    return;
 		}
 
-		var next = this.tripleState.fillNext();
-
-		this.highlights.push( lex );
-
-		if( next === TripleComponent.Subject ){
-
-		    lex.highlightSubject();
-		    return;
-		}
-
-		if( next === TripleComponent.Object ){
-
-		    lex.highlightObject();
-		    return;
-		}
-
-		if( next === TripleComponent.Relation ){
-
-		    lex.highlightRelation();
-		    return;
-		}
+		this._focusLexeme( lex );
 	});
     }
 
