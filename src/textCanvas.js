@@ -101,6 +101,37 @@ class TripleState{
 		&& TripleComponent.Relation !== last )
     }
 
+    _vacate( component ){
+
+	var ix = this.filled.indexOf( component );
+
+	if( 0 > ix ){
+
+	    return;
+	}
+
+	this.vacant.push( component );
+	this.filled.splice( ix, 1 );
+    }
+
+    vacateSubject(){
+
+	this._vacate( TripleComponent.Subject );
+	this.hasSubject = false;
+    }
+
+    vacateObject(){
+
+	this._vacate( TripleComponent.Object );
+	this.hasObject = false;
+    }
+
+    vacateRelation(){
+
+	this._vacate( TripleComponent.Relation );
+	this.hasRelation = false;
+    }
+
     constructor(){
 
 	this.clear();

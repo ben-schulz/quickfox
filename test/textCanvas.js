@@ -87,6 +87,58 @@ describe( "TextCanvas", function(){
 	    });
 	});
 
+	describe( "vacate", function(){
+
+	    it( "frees subject", function(){
+
+		var state = new TripleState();
+
+		var preSubject = state.fillNext();
+		state.fillNext();
+
+		assert.isTrue( state.hasSubject );
+		state.vacateSubject();
+		assert.isFalse( state.hasSubject );
+
+		var postSubject = state.fillNext();
+
+		assert.equal( preSubject, postSubject );
+	    });
+
+
+	    it( "frees object", function(){
+
+		var state = new TripleState();
+
+		state.fillNext();
+		var preObject = state.fillNext();
+		state.fillNext();
+
+		assert.isTrue( state.hasObject );
+		state.vacateObject();
+		assert.isFalse( state.hasObject );
+
+		var postObject = state.fillNext();
+
+		assert.equal( preObject, postObject );
+	    });
+
+	    it( "frees relation", function(){
+
+		var state = new TripleState();
+
+		state.fillNext();
+		state.fillNext();
+		var preRelation = state.fillNext();
+
+		state.vacateRelation();
+
+		var postRelation = state.fillNext();
+
+		assert.equal( preRelation, postRelation );
+	    });
+
+	});
 
     });
 
