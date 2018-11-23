@@ -142,7 +142,7 @@ describe( "TextCanvas", function(){
 
     });
 
-    describe( "lexemeHighlighted event", function(){
+    describe( "lexemeSelected event", function(){
 
 	it( "populates each state in order", function(){
 

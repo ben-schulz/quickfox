@@ -124,7 +124,7 @@ class Lexeme{
 	    "click", event => {
 
 		this.element.dispatchEvent(
-		    new CustomEvent( "lexemeHighlighted", {
+		    new CustomEvent( "lexemeSelected", {
 
 			"bubbles": true,
 			"detail": { "target": this } } )

@@ -10,7 +10,7 @@ describe( "Lexeme", function(){
 
 	    var highlighted = false;
 	    container.addEventListener(
-		"lexemeHighlighted", event => {
+		"lexemeSelected", event => {
 
 		    highlighted = true;
 		});

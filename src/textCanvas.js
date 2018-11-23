@@ -215,7 +215,7 @@ class TextCanvas{
 	});
 
 	this.element.addEventListener(
-	    "lexemeHighlighted", event => {
+	    "lexemeSelected", event => {
 
 		var lex = event.detail.target;
 		if( lex.isFocused || this.tripleState.isFull ){
