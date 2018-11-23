@@ -45,22 +45,6 @@ class Lexeme{
 	this.element.classList.add( newLexemeState );
     }
 
-    _setState( lexemeState ){
-
-	this.viewState = lexemeState;
-    }
-
-    _setNextState(){
-
-	var next = ( ( 1 + this._stateIndex )
-		     % LexemeState.All.length )
-
-	this._stateIndex = next;
-	this.viewState = LexemeState.All[ this._stateIndex ];
-
-	this._showState( this.viewState );
-    }
-
     clearHighlights(){
 
 	this.viewState = LexemeState.Unfocused;
@@ -92,6 +76,24 @@ class Lexeme{
     get isRelation(){
 
 	return this.viewState === LexemeState.RelationFocus;
+    }
+
+    highlightSubject(){
+
+	this.viewState = LexemeState.SubjectFocus;
+	this._showState( this.viewState );
+    }
+
+    highlightObject(){
+
+	this.viewState = LexemeState.ObjectFocus;
+	this._showState( this.viewState );
+    }
+
+    highlightRelation(){
+
+	this.viewState = LexemeState.RelationFocus;
+	this._showState( this.viewState );
     }
 
     constructor( text ){

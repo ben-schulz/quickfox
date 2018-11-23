@@ -226,10 +226,23 @@ class TextCanvas{
 
 		this.highlights.push( lex );
 
-		lex._setState(
-		    TripleComponent.toLexemeState( next ) );
+		if( next === TripleComponent.Subject ){
 
-		lex._showState( TripleComponent.toLexemeState( next ) );
+		    lex.highlightSubject();
+		    return;
+		}
+
+		if( next === TripleComponent.Object ){
+
+		    lex.highlightObject();
+		    return;
+		}
+
+		if( next === TripleComponent.Relation ){
+
+		    lex.highlightRelation();
+		    return;
+		}
 	});
     }
 
