@@ -9,9 +9,9 @@ class TripleState{
 
     clear(){
 
-	this.hasSubject = false;
-	this.hasObject = false;
-	this.hasRelation = false;
+	this.subject = null;
+	this.object = null;
+	this.relation = null;
 
 	this.vacant = [
 
@@ -23,6 +23,21 @@ class TripleState{
 	this.filled = [];
     }
 
+    get hasSubject(){
+
+	return null !== this.subject;
+    }
+
+    get hasObject(){
+
+	return null !== this.object;
+    }
+
+    get hasRelation(){
+
+	return null !== this.relation
+    }
+
     get isFull(){
 
 	return ( this.hasSubject
@@ -31,7 +46,7 @@ class TripleState{
     }
 
 
-    fillNext(){
+    fillNext( data ){
 
 	if( 1 > this.vacant.length ){
 
@@ -41,17 +56,20 @@ class TripleState{
 	var next = this.vacant.pop();
 	this.filled.push( next );
 
-	this.hasSubject = (
-	    this.hasSubject
-		|| next === TripleComponent.Subject );
+	if( next === TripleComponent.Subject ){
 
-	this.hasObject = (
-	    this.hasObject
-		|| next === TripleComponent.Object );
+	    this.subject = data;
+	}
 
-	this.hasRelation = (
-	    this.hasRelation
-		|| next === TripleComponent.Relation );
+	else if( next === TripleComponent.Object ){
+
+	    this.object = data;
+	}
+
+	else if( next === TripleComponent.Relation ){
+
+	    this.relation = data;
+	}
 
 	return next;
     }
@@ -66,17 +84,21 @@ class TripleState{
 	var last = this.filled.pop();
 	this.vacant.push( last );
 
-	this.hasSubject = (
-	    this.hasSubject
-		&& TripleComponent.Subject !== last )
+	if( last === TripleComponent.Subject ){
 
-	this.hasObject = (
-	    this.hasObject
-		&& TripleComponent.Object !== last )
+	    this.subject = null;
+	}
 
-	this.hasRelation = (
-	    this.hasRelation
-		&& TripleComponent.Relation !== last )
+	else if( last === TripleComponent.Object ){
+
+	    this.object = null;
+	}
+
+	else if( last === TripleComponent.Relation ){
+
+	    this.relation = null;
+	}
+
     }
 
     _vacate( component ){
@@ -90,24 +112,36 @@ class TripleState{
 
 	this.vacant.push( component );
 	this.filled.splice( ix, 1 );
+
+	if( component === TripleComponent.Subject ){
+
+	    this.subject = null;
+	}
+
+	else if( component === TripleComponent.Object ){
+
+	    this.object = null;
+	}
+
+	else if( component === TripleComponent.Relation ){
+
+	    this.relation = null;
+	}
     }
 
     vacateSubject(){
 
 	this._vacate( TripleComponent.Subject );
-	this.hasSubject = false;
     }
 
     vacateObject(){
 
 	this._vacate( TripleComponent.Object );
-	this.hasObject = false;
     }
 
     vacateRelation(){
 
 	this._vacate( TripleComponent.Relation );
-	this.hasRelation = false;
     }
 
     constructor(){

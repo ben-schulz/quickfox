@@ -57,17 +57,17 @@ describe( "TextCanvas", function(){
 
 		var state = new TripleState();
 
-		var first = state.fillNext();
+		var first = state.fillNext( "foo" );
 
 		assert.isTrue( state.hasSubject );
 		assert.equal( first, TripleComponent.Subject );
 
-		var second = state.fillNext();
+		var second = state.fillNext( "bar" );
 
 		assert.isTrue( state.hasObject );
 		assert.equal( second, TripleComponent.Object );
 
-		var third = state.fillNext();
+		var third = state.fillNext( "cat" );
 
 		assert.isTrue( state.hasRelation );
 		assert.equal( third, TripleComponent.Relation );
@@ -93,14 +93,18 @@ describe( "TextCanvas", function(){
 
 		var state = new TripleState();
 
-		var preSubject = state.fillNext();
-		state.fillNext();
+		var preSubject = state.fillNext( "foo" );
+		state.fillNext( "bar" );
 
-		assert.isTrue( state.hasSubject );
+		assert.isTrue( state.hasSubject,
+			     "expected 'hasSubject' true" );
+
 		state.vacateSubject();
-		assert.isFalse( state.hasSubject );
 
-		var postSubject = state.fillNext();
+		assert.isFalse( state.hasSubject,
+			      "expected 'hasSubject' false" );
+
+		var postSubject = state.fillNext( "cat" );
 
 		assert.equal( preSubject, postSubject );
 	    });
