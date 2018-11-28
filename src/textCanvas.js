@@ -56,20 +56,7 @@ class TripleState{
 	var next = this.vacant.pop();
 	this.filled.push( next );
 
-	if( next === TripleComponent.Subject ){
-
-	    this.subject = data;
-	}
-
-	else if( next === TripleComponent.Object ){
-
-	    this.object = data;
-	}
-
-	else if( next === TripleComponent.Relation ){
-
-	    this.relation = data;
-	}
+	this.setters[ next ]( data );
 
 	return next;
     }
@@ -84,21 +71,7 @@ class TripleState{
 	var last = this.filled.pop();
 	this.vacant.push( last );
 
-	if( last === TripleComponent.Subject ){
-
-	    this.subject = null;
-	}
-
-	else if( last === TripleComponent.Object ){
-
-	    this.object = null;
-	}
-
-	else if( last === TripleComponent.Relation ){
-
-	    this.relation = null;
-	}
-
+	this.setters[ last ]( null );
     }
 
     _vacate( component ){
@@ -113,20 +86,7 @@ class TripleState{
 	this.vacant.push( component );
 	this.filled.splice( ix, 1 );
 
-	if( component === TripleComponent.Subject ){
-
-	    this.subject = null;
-	}
-
-	else if( component === TripleComponent.Object ){
-
-	    this.object = null;
-	}
-
-	else if( component === TripleComponent.Relation ){
-
-	    this.relation = null;
-	}
+	this.setters[ component ]( null );
     }
 
     vacateSubject(){
@@ -144,9 +104,35 @@ class TripleState{
 	this._vacate( TripleComponent.Relation );
     }
 
+    setSubject( data ){
+
+	this.subject = data;
+    }
+
+    setObject( data ){
+
+	this.object = data;
+    }
+
+    setRelation( data ){
+
+	this.relation = data;
+    }
+
     constructor(){
 
 	this.clear();
+
+	this.setters = {}
+
+	this.setters[ TripleComponent.Subject ] =
+	    value => this.setSubject( value );
+
+	this.setters[ TripleComponent.Object ] =
+	    value => this.setObject( value );
+
+	this.setters[ TripleComponent.Relation ] =
+	    value => this.setRelation( value );
     }
 }
 
