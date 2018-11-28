@@ -169,6 +169,21 @@ class TextCanvas{
 	this.tripleState.hasRelation = boolValue;
     }
 
+    get subject(){
+
+	return this.tripleState.subject;
+    }
+
+    get object(){
+
+	return this.tripleState.object;
+    }
+
+    get relation(){
+
+	return this.tripleState.relation;
+    }
+    
     _unfocusLexeme( lex ){
 
 	if( lex.isSubject ){
@@ -189,7 +204,7 @@ class TextCanvas{
 
     _focusLexeme( lex ){
 
-	var next = this.tripleState.fillNext();
+	var next = this.tripleState.fillNext( lex.text );
 
 	this.highlights.push( lex );
 
@@ -212,6 +227,63 @@ class TextCanvas{
 	}
     }
 
+    lexemeSelected( lex ){
+
+	if( lex.isFocused || this.tripleState.isFull ){
+
+	    this._unfocusLexeme( lex );
+	    return;
+	}
+
+	this._focusLexeme( lex );
+    }
+
+    clearHighlights(){
+
+	this.highlights.forEach( lex => {
+
+	    lex.clearHighlights();
+	});
+
+	this.highlights = [];
+	this.tripleState.clear();
+    }
+
+
+    saveTriple(){
+
+	if( !this.tripleState.isFull ){
+
+	    return;
+	}
+
+	var save = new CustomEvent( "saveTriple", {
+
+	    "detail": {
+
+		"subject": this.subject,
+		"object": this.object,
+		"relation": this.relation
+	    }
+	});
+
+	this.subscribers[ "saveTriple" ].forEach( target => {
+
+	    target.dispatchEvent( save );
+	});
+    }
+
+
+    subscribe( eventName, listener ){
+
+	if( !this.subscribers.hasOwnProperty( eventName ) ){
+
+	    this.subscribers[ eventName ] = [];
+	}
+
+	this.subscribers[ eventName ].push( listener );
+    }
+
     constructor( document ){
 
 	this.elementType = "div";
@@ -220,31 +292,20 @@ class TextCanvas{
 
 	this.highlights = [];
 
+	this.subscribers = {};
+
 	this.tripleState = new TripleState();
 
 	this.element.addEventListener(
 	    "clearHighlights", event => {
 
-		this.highlights.forEach( lex => {
-
-		    lex.clearHighlights();
-		});
-
-		this.highlights = [];
-		this.tripleState.clear();
+		this.clearHighlights();
 	});
 
 	this.element.addEventListener(
 	    "lexemeSelected", event => {
 
-		var lex = event.detail.target;
-		if( lex.isFocused || this.tripleState.isFull ){
-
-		    this._unfocusLexeme( lex );
-		    return;
-		}
-
-		this._focusLexeme( lex );
+		this.lexemeSelected( event.detail.target );
 	});
     }
 

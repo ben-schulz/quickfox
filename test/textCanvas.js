@@ -59,16 +59,19 @@ describe( "TextCanvas", function(){
 
 		var first = state.fillNext( "foo" );
 
+		assert.equal( "foo", state.subject );
 		assert.isTrue( state.hasSubject );
 		assert.equal( first, TripleComponent.Subject );
 
 		var second = state.fillNext( "bar" );
 
+		assert.equal( "bar", state.object );
 		assert.isTrue( state.hasObject );
 		assert.equal( second, TripleComponent.Object );
 
 		var third = state.fillNext( "cat" );
 
+		assert.equal( "cat", state.relation );
 		assert.isTrue( state.hasRelation );
 		assert.equal( third, TripleComponent.Relation );
 	    });
@@ -324,4 +327,87 @@ describe( "TextCanvas", function(){
 	});
     });
 
+
+    describe( "subscribe", function(){
+
+	it( "assigns given listener", function(){
+
+	    var canvas = new TextCanvas( document );
+
+	    var subject = new Lexeme( "foo" );
+	    var object = new Lexeme( "bar" );
+	    var relation = new Lexeme( "cat" );
+
+	    canvas.addLexeme( subject );
+	    canvas.addLexeme( object );
+	    canvas.addLexeme( relation );
+
+	    canvas.lexemeSelected( subject );
+	    canvas.lexemeSelected( object );
+	    canvas.lexemeSelected( relation );
+
+	    var target = document.createElement( "div" );
+
+	    target.addEventListener(
+		"saveTriple",  event => {
+
+		    var subject = document.createTextNode(
+			event.detail.subject );
+
+		    var object = document.createTextNode(
+			event.detail.object );
+
+		    var relation = document.createTextNode(
+			event.detail.relation );
+
+		    target.appendChild( subject );
+		    target.appendChild( object );
+		    target.appendChild( relation );
+		    
+		});
+
+	    canvas.subscribe( "saveTriple", target )
+	    canvas.saveTriple();
+
+	    assert.equal( canvas.subject,
+			     target.childNodes[0].textContent );
+
+	    assert.equal( canvas.object,
+			  target.childNodes[1].textContent );
+
+	    assert.equal( canvas.relation,
+			  target.childNodes[2].textContent );
+
+	});
+
+
+	it( "skips dispatch if triple incomplete", function(){
+
+	    var canvas = new TextCanvas( document );
+
+	    var subject = new Lexeme( "foo" );
+	    var object = new Lexeme( "bar" );
+
+	    canvas.addLexeme( subject );
+	    canvas.addLexeme( object );
+
+	    canvas.lexemeSelected( subject );
+	    canvas.lexemeSelected( object );
+
+	    var target = document.createElement( "div" );
+
+	    var eventRaised = false;
+	    target.addEventListener(
+		"saveTriple",  event => {
+
+		    eventRaised = true;
+		});
+
+	    canvas.subscribe( "saveTriple", target )
+	    canvas.saveTriple();
+
+	    assert.isFalse( eventRaised );
+	});
+
+    });
 });
