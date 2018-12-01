@@ -38,8 +38,26 @@ fileSelector.addEventListener(
 		canvas.element.dispatchEvent( event );
 	    };
 
+	    var onEnter = function( contents ){
+
+		return contents.slice(-1)[0].isEnter;
+	    };
+
+	    var showTriple = function( contents ){
+
+		var triple = [
+		    canvas.subject.toString(),
+		    canvas.object.toString(),
+		    canvas.relation.toString()
+		];
+
+		console.info( triple.join(", ")  );
+	    };
+
 	    var buffer = new TextBuffer( document, "div" );
-	    buffer.onFlush( raiseClear, onEscape );
+
+	    buffer.subscribe( onEscape, raiseClear );
+	    buffer.subscribe( onEnter, showTriple );
 
 	    var keyboard = new KeyboardInput( buffer.element );
 	    keyboard.bindInput( document.body );
