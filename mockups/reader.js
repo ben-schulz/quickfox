@@ -64,8 +64,8 @@ fileSelector.addEventListener(
 
 	    var buffer = new TextBuffer( document, "div" );
 
-	    buffer.subscribe( onEscape, raiseClear );
-	    buffer.subscribe( onEnter, showTriple );
+	    buffer.subscribe( onEscape, raiseClear, true );
+	    buffer.subscribe( onEnter, showTriple, true );
 
 	    var keyboard = new KeyboardInput( buffer.element );
 	    keyboard.bindInput( document.body );
