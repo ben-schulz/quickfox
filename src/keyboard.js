@@ -9,8 +9,9 @@ class Key{
 
 	this.keyValue = key;
 
-	this.isBackspace = key === "Backspace";
-	this.isEscape = key === "Escape";
+	this.isBackspace = key === KeyCode.Backspace;
+	this.isEscape = key === KeyCode.Escape;
+	this.isEnter = key === KeyCode.Enter;
     }
 }
 
