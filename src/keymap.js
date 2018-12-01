@@ -25,5 +25,6 @@ var KeyCode = {
     },
 
     "Escape": "Escape",
-    "Backspace": "Backspace"
+    "Backspace": "Backspace",
+    "Enter": "Enter"
 };
