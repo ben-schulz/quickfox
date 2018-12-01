@@ -1,6 +1,8 @@
 var fileSelector =
     document.getElementById( "inputFile" );
 
+var tripleView = document.getElementById( "tripleStore" );
+
 fileSelector.addEventListener(
     "change", function( event ){
 
@@ -51,7 +53,13 @@ fileSelector.addEventListener(
 		    canvas.relation.toString()
 		];
 
-		console.info( triple.join(", ")  );
+		var subtext = document.createTextNode(
+		    triple.join(", ")  );
+
+		var newItem = document.createElement( "p" );
+		newItem.appendChild( subtext );
+
+		tripleView.appendChild( newItem );
 	    };
 
 	    var buffer = new TextBuffer( document, "div" );

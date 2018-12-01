@@ -3,6 +3,36 @@ span{
     padding: 2pt;
 }
 
+#inputFile{
+
+    height: 10%;
+}
+
+#fileContents{
+
+
+    top: 10%;
+    left: 0;
+    width: 50%;
+    height: 100%;
+    
+    position: fixed;
+}
+
+#tripleStore{
+
+    top: 0;
+    left: 50%;
+    
+    width: 50%;
+    height: 100%;
+
+    position: fixed;
+
+    background-color: #efefef;
+
+}
+
 .unfocused{
 
     background-color: transparent;
