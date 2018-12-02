@@ -11,6 +11,8 @@ fileSelector.addEventListener(
 	var canvas = new TextCanvas( document );
 	var outputDiv = canvas.element;
 
+	outputDiv.id = "fileContents";
+
 	document.body.appendChild( outputDiv );
 
 	var fileReader = new FileReader();

@@ -1,6 +1,7 @@
 span{
 
     padding: 2pt;
+
 }
 
 #inputFile{
@@ -10,13 +11,14 @@ span{
 
 #fileContents{
 
-
     top: 10%;
     left: 0;
     width: 50%;
     height: 100%;
     
     position: fixed;
+
+    overflow-wrap: break-word;
 }
 
 #tripleStore{
