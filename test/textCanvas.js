@@ -65,15 +65,16 @@ describe( "TextCanvas", function(){
 
 		var second = state.fillNext( "bar" );
 
-		assert.equal( "bar", state.object );
-		assert.isTrue( state.hasObject );
-		assert.equal( second, TripleComponent.Object );
+		assert.equal( "bar", state.relation );
+		assert.isTrue( state.hasRelation );
+		assert.equal( second, TripleComponent.Relation );
 
 		var third = state.fillNext( "cat" );
 
-		assert.equal( "cat", state.relation );
-		assert.isTrue( state.hasRelation );
-		assert.equal( third, TripleComponent.Relation );
+		assert.equal( "cat", state.object );
+		assert.isTrue( state.hasObject );
+		assert.equal( third, TripleComponent.Object );
+
 	    });
 
 	    it( "inverts 'vacateLast'", function(){
@@ -118,8 +119,8 @@ describe( "TextCanvas", function(){
 		var state = new TripleState();
 
 		state.fillNext();
-		var preObject = state.fillNext();
 		state.fillNext();
+		var preObject = state.fillNext();
 
 		assert.isTrue( state.hasObject );
 		state.vacateObject();
@@ -135,9 +136,10 @@ describe( "TextCanvas", function(){
 		var state = new TripleState();
 
 		state.fillNext();
-		state.fillNext();
 		var preRelation = state.fillNext();
+		state.fillNext();
 
+		state.vacateRelation();
 		state.vacateRelation();
 
 		var postRelation = state.fillNext();
@@ -168,14 +170,14 @@ describe( "TextCanvas", function(){
 			 "expected 'hasSubject' true");
 
 	    lex1.element.click();
-	    assertObjectFocused( lex1 );
-	    assert.isTrue( canvas.hasObject,
-			 "expected 'hasObject' true");
-
-	    lex2.element.click();
-	    assertRelationFocused( lex2 );
+	    assertRelationFocused( lex1 );
 	    assert.isTrue( canvas.hasRelation,
 			   "expected 'hasRelation' true");
+
+	    lex2.element.click();
+	    assertObjectFocused( lex2 );
+	    assert.isTrue( canvas.hasObject,
+			 "expected 'hasObject' true");
 
 	    assert.notEqual( null, canvas.highlights[0] );
 	});
@@ -215,13 +217,13 @@ describe( "TextCanvas", function(){
 	    lex1.element.click();
 
 	    lex2.element.click();
-	    assertRelationFocused( lex2 );
+	    assertObjectFocused( lex2 );
 
 	    lex2.element.click();
 	    assertUnfocused( lex2 );
 
 	    lex3.element.click();
-	    assertRelationFocused( lex3 );
+	    assertObjectFocused( lex3 );
 	});
 
 	it( "clears current if already highlighted", function(){
@@ -236,7 +238,7 @@ describe( "TextCanvas", function(){
 	    lex0.element.click();
 	    lex1.element.click();
 
-	    assertObjectFocused( lex1 );
+	    assertRelationFocused( lex1 );
 
 	    lex1.element.click();
 	    assertUnfocused( lex1 );
@@ -261,7 +263,7 @@ describe( "TextCanvas", function(){
 	    lex2.element.click();
 
 	    assertUnfocused( lex1 );
-	    assertObjectFocused( lex2 );
+	    assertRelationFocused( lex2 );
 
 	});
 
@@ -269,26 +271,25 @@ describe( "TextCanvas", function(){
 
 	    var canvas = new TextCanvas( document );
 	    var subject = new Lexeme( "foo" );
-	    var firstObject = new Lexeme( "bar" );
+	    var firstRelation = new Lexeme( "bar" );
 	    var relation = new Lexeme( "cat" );
-	    var nextObject = new Lexeme( "gromvin" );
+	    var nextRelation = new Lexeme( "gromvin" );
 
 	    canvas.addLexeme( subject );
-	    canvas.addLexeme( firstObject );
+	    canvas.addLexeme( firstRelation );
 	    canvas.addLexeme( relation );
-	    canvas.addLexeme( nextObject );
+	    canvas.addLexeme( nextRelation );
 
 	    subject.element.click();
-	    firstObject.element.click();
+	    firstRelation.element.click();
 	    relation.element.click();
 
-	    firstObject.element.click();
+	    firstRelation.element.click();
 
-	    nextObject.element.click();
+	    nextRelation.element.click();
 
-	    assertUnfocused( firstObject );
-	    assertObjectFocused( nextObject );
-
+	    assertUnfocused( firstRelation );
+	    assertRelationFocused( nextRelation );
 	});
 
     });

@@ -1,8 +1,8 @@
 var TripleComponent = {
 
 	"Subject": "tripleSubject",
-	"Object": "tripleObject",
 	"Relation": "tripleRelation",
+	"Object": "tripleObject",
 };
 
 class TripleState{
@@ -10,13 +10,13 @@ class TripleState{
     clear(){
 
 	this.subject = null;
-	this.object = null;
 	this.relation = null;
+	this.object = null;
 
 	this.vacant = [
 
-	    TripleComponent.Relation,
 	    TripleComponent.Object,
+	    TripleComponent.Relation,
 	    TripleComponent.Subject,
 	];
 
@@ -41,8 +41,8 @@ class TripleState{
     get isFull(){
 
 	return ( this.hasSubject
-		 && this.hasObject
-		 && this.hasRelation );
+		 && this.hasRelation
+		 && this.hasObject ) ;
     }
 
 
@@ -190,13 +190,13 @@ class TextCanvas{
 
 	    this.tripleState.vacateSubject();
 	}
-	else if( lex.isObject ){
-
-	    this.tripleState.vacateObject();
-	}
 	else if( lex.isRelation ){
 
 	    this.tripleState.vacateRelation();
+	}
+	else if( lex.isObject ){
+
+	    this.tripleState.vacateObject();
 	}
 
 	lex.clearHighlights();
@@ -214,15 +214,15 @@ class TextCanvas{
 	    return;
 	}
 
-	if( next === TripleComponent.Object ){
-
-	    lex.highlightObject();
-	    return;
-	}
-
 	if( next === TripleComponent.Relation ){
 
 	    lex.highlightRelation();
+	    return;
+	}
+
+	if( next === TripleComponent.Object ){
+
+	    lex.highlightObject();
 	    return;
 	}
     }
@@ -262,8 +262,8 @@ class TextCanvas{
 	    "detail": {
 
 		"subject": this.subject,
+		"relation": this.relation,
 		"object": this.object,
-		"relation": this.relation
 	    }
 	});
 
