@@ -37,7 +37,7 @@ downloadButton.addEventListener( "click", event => {
     if( fileSelector.files[0] ){
 
 	var outputFileName = fileSelector.files[0].name;
-	downloadTriples( store.triples, outputFileName );
+	downloadTriples( store.toJson(), outputFileName );
     }
 
 });
@@ -88,16 +88,16 @@ fileSelector.addEventListener(
 
 	    var showTriple = function( contents ){
 
-		var triple = [
-		    canvas.subject.toString(),
-		    canvas.object.toString(),
-		    canvas.relation.toString()
-		];
+		var triple = {
+		    "subject": canvas.subject,
+		    "relation": canvas.relation,
+		    "object": canvas.object
+		};
 
 		store.addTriple( triple );
 
 		var subtext = document.createTextNode(
-		    store.triples.toString()  );
+		    store.toJson() );
 
 		var newItem = document.createElement( "p" );
 

@@ -2,12 +2,22 @@ class TripleStore{
 
     addTriple( t ){
 
-	this.triples.push( t )
+	if( !this.triples[ t.subject ] ){
+
+	    this.triples[ t.subject ] = {}
+	}
+
+	this.triples[ t.subject ][ t.relation ] = t.object;
+    }
+
+    toJson(){
+
+	return JSON.stringify( this.triples );
     }
 
     constructor(){
 
-	this.triples = [];
+	this.triples = {};
     }
 }
 
