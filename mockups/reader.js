@@ -47,6 +47,8 @@ fileSelector.addEventListener(
 		return contents.slice(-1)[0].isEnter;
 	    };
 
+	    var store = new TripleStore();
+
 	    var showTriple = function( contents ){
 
 		var triple = [
@@ -55,11 +57,19 @@ fileSelector.addEventListener(
 		    canvas.relation.toString()
 		];
 
+		store.addTriple( triple );
+
 		var subtext = document.createTextNode(
-		    triple.join(", ")  );
+		    store.triples.toString()  );
 
 		var newItem = document.createElement( "p" );
+
 		newItem.appendChild( subtext );
+
+		if( tripleView.firstChild ){
+
+		    tripleView.firstChild.remove();
+		}
 
 		tripleView.appendChild( newItem );
 	    };
