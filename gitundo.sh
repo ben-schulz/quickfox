@@ -16,7 +16,7 @@ function list_staged(){
     echo $( git status -s | sed -n -e 's/[AM]\+ //p' )
 }
 
-list_modifications_on_tracked(){
+function list_modifications_on_tracked(){
 
     echo $( git status -s | sed -n -e 's/ M//p' )
 }
