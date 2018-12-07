@@ -2,7 +2,7 @@ PWD = `pwd`
 TESTPAGE = "$(PWD)/test/results.html"
 BROWSE = firefox -new-tab
 
-SRC_FILES = src/* test/*
+SRC_FILES = src/* test/*.js
 
 ENTR = entr
 ENTR_FLAGS = -c
