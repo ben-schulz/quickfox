@@ -16,8 +16,6 @@ span{
     width: 50%;
     height: 100%;
     
-    position: fixed;
-
     overflow-wrap: break-word;
 }
 
