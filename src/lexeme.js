@@ -132,3 +132,23 @@ class Lexeme{
 	    });
     }
 }
+
+var Lexer = {
+
+    "lex": function( text ){
+
+	var separator = /\W+/;
+	var tokens = text.split( separator );
+
+	var result = [];
+	tokens.forEach( t => {
+
+	    if( 1 > t.length ){
+
+		result.push( t );
+	    }
+	} );
+
+	return result;
+    },
+};

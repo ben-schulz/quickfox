@@ -20,4 +20,20 @@ describe( "Lexeme", function(){
 	    assert.isTrue( highlighted );
 	});
     });
+
+    describe( "the lexer", function(){
+
+	it( "splits on non-alphabetic characters", function(){
+
+	    var text = "she fetched the kittens indoors,\r"
+		+ "to wash and dress them, before\n"
+		+ "\tthe fine company arrived.";
+
+	    var result = Lexer.lex( text );
+
+	    console.info(result);
+	    assert.equal( 15, result.length );
+
+	} );
+    } );
 });
