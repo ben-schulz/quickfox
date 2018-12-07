@@ -140,15 +140,21 @@ var Lexer = {
 	var separator = /\W+/;
 	var tokens = text.split( separator );
 
-	var result = [];
-	tokens.forEach( t => {
+	if( 1 > tokens.length ){
 
-	    if( 1 > t.length ){
+	    return [];
+	}
 
-		result.push( t );
-	    }
-	} );
+	if( 1 > tokens[0].length ){
 
-	return result;
+	    tokens.shift();
+	}
+
+	var lastIndex = tokens.length - 1;
+	if( 1 > tokens[ lastIndex ].length ){
+
+	    tokens.pop();
+	}
+	return tokens;
     },
 };

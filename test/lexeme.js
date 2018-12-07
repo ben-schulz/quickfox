@@ -25,14 +25,33 @@ describe( "Lexeme", function(){
 
 	it( "splits on non-alphabetic characters", function(){
 
-	    var text = "she fetched the kittens indoors,\r"
-		+ "to wash and dress them, before\n"
+	    var text = "...she fetched the kittens indoors,\r"
+		+ "to wash and dress ... them,, before\n"
 		+ "\tthe fine company arrived.";
 
 	    var result = Lexer.lex( text );
 
 	    assert.equal( 15, result.length );
 
+	    var expect = [
+		"she",
+		"fetched",
+		"the",
+		"kittens",
+		"indoors",
+		"to",
+		"wash",
+		"and",
+		"dress",
+		"them",
+		"before",
+		"the",
+		"fine",
+		"company",
+		"arrived"
+	    ];
+
+	    assert.deepEqual( expect, result );
 	} );
     } );
 });
