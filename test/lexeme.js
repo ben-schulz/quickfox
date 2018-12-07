@@ -31,7 +31,6 @@ describe( "Lexeme", function(){
 
 	    var result = Lexer.lex( text );
 
-	    console.info(result);
 	    assert.equal( 15, result.length );
 
 	} );
