@@ -137,24 +137,41 @@ var Lexer = {
 
     "lex": function( text ){
 
-	var separator = /\W+/;
-	var tokens = text.split( separator );
-
-	if( 1 > tokens.length ){
+	if( 1 > text.length ){
 
 	    return [];
 	}
 
-	if( 1 > tokens[0].length ){
+	var alpha = /[a-zA-Z]/;
+	var separator = /[^a-zA-Z]/;	
 
-	    tokens.shift();
+	var tokens = [];
+	var currentToken = '';
+
+	var currentIsAlpha = alpha.test( text.charAt( 0 ) );
+	var prevIsAlpha = !currentIsAlpha;
+	
+	for( var ix = 0; ix < text.length; ++ix ){
+
+	    var c = text.charAt( ix );
+
+	    prevIsAlpha = currentIsAlpha;
+	    currentIsAlpha = alpha.test( c )
+
+	    if( ( prevIsAlpha && currentIsAlpha )
+		|| ( !prevIsAlpha && !currentIsAlpha ) ){
+
+		currentToken += c;
+	    }
+	    else{
+
+		tokens.push( currentToken );
+		currentToken = c;
+	    }
 	}
 
-	var lastIndex = tokens.length - 1;
-	if( 1 > tokens[ lastIndex ].length ){
+	tokens.push( currentToken );
 
-	    tokens.pop();
-	}
 	return tokens;
     },
 };
