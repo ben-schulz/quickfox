@@ -60,7 +60,7 @@ fileSelector.addEventListener(
 
 	    var contents = event.target.result;
 
-	    var lexemes = contents.split(' ');
+	    var lexemes = Lexer.lex( contents );
 
 	    for( var ix = 0; ix < lexemes.length; ++ix ){
 
