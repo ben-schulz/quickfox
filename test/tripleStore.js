@@ -14,7 +14,7 @@ describe( "TripleStore", function(){
 
 	    var result = JSON.parse( store.toJson() );
 
-	    assert.equal( "cat", result.foo.bar );
+	    assert.equal( "cat", result.foo.bar.cat );
 	} );
     } );
 

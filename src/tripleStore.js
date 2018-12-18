@@ -4,10 +4,15 @@ class TripleStore{
 
 	if( !this.triples[ t.subject ] ){
 
-	    this.triples[ t.subject ] = {}
+	    this.triples[ t.subject ] = {};
 	}
 
-	this.triples[ t.subject ][ t.relation ] = t.object;
+	if( !this.triples[ t.subject ][ t.relation ] ){
+
+	    this.triples[ t.subject ][ t.relation ] = {};
+	}
+
+	this.triples[ t.subject ][ t.relation ][ t.object ] = t.object;
     }
 
     toJson(){
