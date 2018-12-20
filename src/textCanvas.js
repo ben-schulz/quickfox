@@ -38,6 +38,12 @@ class TripleState{
 	return null !== this.relation
     }
 
+    get isComplete(){
+
+	return ( this.hasSubject
+		 && this.hasRelation );
+    }
+
     get isFull(){
 
 	return ( this.hasSubject
@@ -252,7 +258,7 @@ class TextCanvas{
 
     saveTriple(){
 
-	if( !this.tripleState.isFull ){
+	if( !this.tripleState.isComplete ){
 
 	    return;
 	}

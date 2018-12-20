@@ -382,18 +382,52 @@ describe( "TextCanvas", function(){
 	});
 
 
+	it( "saves intransitive triples", function(){
+
+	    var canvas = new TextCanvas( document );
+
+	    var subject = new Lexeme( "foo" );
+	    var relation = new Lexeme( "bar" );
+
+	    canvas.addLexeme( subject );
+	    canvas.addLexeme( relation );
+
+	    canvas.lexemeSelected( subject );
+	    canvas.lexemeSelected( relation );
+
+	    var target = document.createElement( "div" );
+
+	    var eventRaised = false;
+	    target.addEventListener(
+		"saveTriple",  event => {
+
+		    eventRaised = true;
+		});
+
+	    canvas.subscribe( "saveTriple", target )
+	    canvas.saveTriple();
+
+	    assert.isTrue( eventRaised );
+	});
+
+
 	it( "skips dispatch if triple incomplete", function(){
 
 	    var canvas = new TextCanvas( document );
 
 	    var subject = new Lexeme( "foo" );
-	    var object = new Lexeme( "bar" );
+	    var relation = new Lexeme( "bar" );
+	    var object = new Lexeme( "cat" );
 
 	    canvas.addLexeme( subject );
+	    canvas.addLexeme( relation );
 	    canvas.addLexeme( object );
 
 	    canvas.lexemeSelected( subject );
+	    canvas.lexemeSelected( relation );
 	    canvas.lexemeSelected( object );
+	    
+	    canvas.lexemeSelected( relation );
 
 	    var target = document.createElement( "div" );
 
@@ -409,6 +443,5 @@ describe( "TextCanvas", function(){
 
 	    assert.isFalse( eventRaised );
 	});
-
     });
 });
