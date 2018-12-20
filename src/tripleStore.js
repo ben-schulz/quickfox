@@ -1,5 +1,15 @@
 class TripleStore{
 
+    static isReferent( token ){
+
+	if( token ){
+
+	    return true;
+	}
+
+	return false;
+    }
+
     addTriple( t ){
 
 	if( !this.triples[ t.subject ] ){
@@ -12,7 +22,11 @@ class TripleStore{
 	    this.triples[ t.subject ][ t.relation ] = {};
 	}
 
-	this.triples[ t.subject ][ t.relation ][ t.object ] = t.object;
+	if( TripleStore.isReferent( t.object ) ){
+
+	    this.triples[ t.subject ][ t.relation ][ t.object ] =
+		t.object;
+	}
     }
 
     toJson(){
