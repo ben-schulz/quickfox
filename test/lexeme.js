@@ -18,8 +18,38 @@ describe( "Lexeme", function(){
 	    lex.element.click();
 
 	    assert.isTrue( highlighted );
-	});
-    });
+	} );
+    } );
+
+
+    describe( "on reference made", function(){
+
+	it( "classifies page element as referent", function(){
+
+	    var lex = new Lexeme( "foo" );
+
+	    lex.showAsReferent();
+
+	    assert.isTrue(
+		lex.element.classList.contains( "referent" ) );
+	} );
+    } );
+
+    describe( "on reference removed", function(){
+
+	it( "removes referent classification", function(){
+
+	    var lex = new Lexeme( "foo" );
+
+	    lex.showAsReferent();
+
+	    lex.showAsNonReferent();
+
+	    assert.isFalse(
+		lex.element.classList.contains( "referent" ) );
+	} );
+    } );
+
 
     describe( "the lexer", function(){
 

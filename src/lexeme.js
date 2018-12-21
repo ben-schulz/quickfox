@@ -96,6 +96,18 @@ class Lexeme{
 	this._showState( this.viewState );
     }
 
+    showAsReferent(){
+
+	this.element.classList.add( "referent" );
+    }
+
+
+    showAsNonReferent(){
+
+	this.element.classList.remove( "referent" );
+    }
+
+
     constructor( text ){
 
 	this.text = text;
