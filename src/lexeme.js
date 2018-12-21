@@ -21,13 +21,6 @@ var LexemeState = (function() {
 	    states.SubjectFocus,
 	    states.ObjectFocus,
 	    states.RelationFocus,
-	],
-
-	"HighlightedStates": [
-
-	    states.SubjectFocus,
-	    states.ObjectFocus,
-	    states.RelationFocus
 	]
     };
 })();
