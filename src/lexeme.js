@@ -3,6 +3,8 @@ var LexemeState = (function() {
     var states = {
 	"Unfocused": "unfocused",
 
+	"Referent": "referent",
+
 	"SubjectFocus": "subjectfocus",
 	"ObjectFocus": "objectfocus",
 	"RelationFocus": "relationfocus",
@@ -11,6 +13,8 @@ var LexemeState = (function() {
     return{
 
 	"Unfocused": states.Unfocused,
+
+	"Referent": states.Referent,
 
 	"SubjectFocus": states.SubjectFocus,
 	"ObjectFocus": states.ObjectFocus,
@@ -91,13 +95,13 @@ class Lexeme{
 
     showAsReferent(){
 
-	this.element.classList.add( "referent" );
+	this.element.classList.add( LexemeState.Referent );
     }
 
 
     showAsNonReferent(){
 
-	this.element.classList.remove( "referent" );
+	this.element.classList.remove( LexemeState.Referent );
     }
 
 
