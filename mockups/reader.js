@@ -64,8 +64,7 @@ fileSelector.addEventListener(
 
 	    for( var ix = 0; ix < lexemes.length; ++ix ){
 
-		canvas.addLexeme(
-		    new Lexeme( lexemes[ix] ) );
+		canvas.addLexeme( lexemes[ix] );
 	    }
 
 	    var onEscape = function( contents ){

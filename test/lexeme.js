@@ -75,7 +75,7 @@ describe( "Lexeme", function(){
 	    var resultCharCount = 0;
 	    for( var ix = 0; ix < result.length; ++ix ){
 
-		resultCharCount += result[ ix ].length;
+		resultCharCount += result[ ix ].text.length;
 	    }
 
 	    assert.equal( text.length, resultCharCount );
@@ -116,7 +116,7 @@ describe( "Lexeme", function(){
 
 	    for( var ix = 0; ix < result.length; ++ix ){
 
-		assert.equal( expect[ ix ], result[ ix ] );
+		assert.equal( expect[ ix ], result[ ix ].text );
 	    }
 	});
 
@@ -129,11 +129,11 @@ describe( "Lexeme", function(){
 
 		var result = Lexer.lex( text );
 
-		assert.equal( "the", result[0] );
-		assert.equal( " ", result[1] );
-		assert.equal( "cat", result[2] );
-		assert.equal( "   ", result[3] );
-		assert.equal( "sat", result[4] )
+		assert.equal( "the", result[0].text );
+		assert.equal( " ", result[1].text );
+		assert.equal( "cat", result[2].text );
+		assert.equal( "   ", result[3].text );
+		assert.equal( "sat", result[4].text )
 	    });
 
 	    it( "splits on punctuation", function(){
@@ -142,16 +142,16 @@ describe( "Lexeme", function(){
 
 		var result = Lexer.lex( text );
 
-		assert.equal( "cats", result[0] );
-		assert.equal( ",", result[1] );
-		assert.equal( "sit", result[2] );
-		assert.equal( "...", result[3] );
-		assert.equal( "on", result[4] );
-		assert.equal( "..", result[5] );
-		assert.equal( "mats", result[6] )
-		assert.equal( "?!", result[7] )
-		assert.equal( "No", result[8] )
-		assert.equal( ".", result[9] )
+		assert.equal( "cats", result[0].text );
+		assert.equal( ",", result[1].text );
+		assert.equal( "sit", result[2].text );
+		assert.equal( "...", result[3].text );
+		assert.equal( "on", result[4].text );
+		assert.equal( "..", result[5].text );
+		assert.equal( "mats", result[6].text )
+		assert.equal( "?!", result[7].text )
+		assert.equal( "No", result[8].text )
+		assert.equal( ".", result[9].text )
 	    });
 	});
 

@@ -190,12 +190,12 @@ var Lexer = {
 
 	    else{
 
-		tokens.push( currentToken );
+		tokens.push( new Lexeme( currentToken ) );
 		currentToken = c;
 	    }
 	}
 
-	tokens.push( currentToken );
+	tokens.push( new Lexeme ( currentToken ) );
 
 	return tokens;
     },
