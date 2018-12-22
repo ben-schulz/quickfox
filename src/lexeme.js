@@ -153,6 +153,30 @@ class Lexeme{
     }
 }
 
+class Separator{
+
+    constructor( text ){
+
+	this.text = text;
+
+	this.element = (function(){
+
+	    var displayText =
+		document.createTextNode( text );
+
+	    var textSpan = document.createElement( "span" );
+
+	    textSpan.value = text;
+
+	    textSpan.appendChild( displayText );
+
+	    return textSpan;
+
+	})();
+    }
+}
+
+
 var Lexer = {
 
     "alphaRegex": /[a-zA-Z]/,
@@ -188,9 +212,15 @@ var Lexer = {
 		currentToken += c;
 	    }
 
-	    else{
+	    else if( prevIsAlpha && !currentIsAlpha ){
 
 		tokens.push( new Lexeme( currentToken ) );
+		currentToken = c;
+	    }
+
+	    else{
+
+		tokens.push( new Separator( currentToken ) );
 		currentToken = c;
 	    }
 	}
