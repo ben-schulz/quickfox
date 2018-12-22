@@ -330,7 +330,7 @@ describe( "TextCanvas", function(){
 
     describe( "saveTriple event", function(){
 
-	it( "marks referenced lexemes as referents", function(){
+	it( "marks saved tokens as referents", function(){
 
 	    var canvas = new TextCanvas( document );
 
@@ -339,8 +339,8 @@ describe( "TextCanvas", function(){
 	    var relation = new Lexeme( "cat" );
 
 	    canvas.addLexeme( subject );
-	    canvas.addLexeme( object );
 	    canvas.addLexeme( relation );
+	    canvas.addLexeme( object );
 
 	    canvas.lexemeSelected( subject );
 	    canvas.lexemeSelected( object );
@@ -352,6 +352,32 @@ describe( "TextCanvas", function(){
 	    assert.isTrue( relation.isReferent );
 	    assert.isTrue( object.isReferent );
 	} );
+
+	it( "marks matching tokens as referents", function(){
+
+	    var canvas = new TextCanvas( document );
+
+	    var subject = new Lexeme( "foo" );
+	    var object = new Lexeme( "bar" );
+	    var relation = new Lexeme( "cat" );
+
+	    var other = new Lexeme( "cat" );
+
+	    canvas.addLexeme( subject );
+	    canvas.addLexeme( relation );
+	    canvas.addLexeme( object );
+
+	    canvas.addLexeme( other );
+
+	    canvas.lexemeSelected( subject );
+	    canvas.lexemeSelected( relation );
+	    canvas.lexemeSelected( object );
+
+	    canvas.saveTriple();
+
+	    assert.isTrue( other.isReferent );
+	} );
+
     } );
 
     describe( "subscribe", function(){

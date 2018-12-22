@@ -192,7 +192,10 @@ class TextCanvas{
     
     _unfocusLexeme( lex ){
 
-	this.unsubscribe( lex.element );
+	this.lexTable[ lex.text ].forEach( l => {
+
+	    this.unsubscribe( l.element );
+	} );
 
 	if( lex.isSubject ){
 
@@ -216,7 +219,10 @@ class TextCanvas{
 
 	this.highlights.push( lex );
 
-	this.subscribe( "saveTriple", lex.element );
+	this.lexTable[ lex.text ].forEach( l => {
+
+	    this.subscribe( "saveTriple", l.element );
+	} );
 
 	if( next === TripleComponent.Subject ){
 
@@ -318,6 +324,8 @@ class TextCanvas{
 
 	this.highlights = [];
 
+	this.lexTable = {};
+
 	this.subscribers = { "saveTriple": [] };
 
 	this.tripleState = new TripleState();
@@ -338,5 +346,12 @@ class TextCanvas{
     addLexeme( lex ){
 
 	this.element.appendChild( lex.element );
+
+	if( !( lex.text in this.lexTable  ) ){
+
+	    this.lexTable[ lex.text ] = [];
+	}
+
+	this.lexTable[ lex.text ].push( lex );
     }
 }
