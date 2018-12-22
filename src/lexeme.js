@@ -155,6 +155,13 @@ class Lexeme{
 
 var Lexer = {
 
+    "alphaRegex": /[a-zA-Z]/,
+
+    "isAlpha": function( c ){
+
+	return this.alphaRegex.test( c );
+    },
+
     "lex": function( text ){
 
 	if( 1 > text.length ){
@@ -162,12 +169,10 @@ var Lexer = {
 	    return [];
 	}
 
-	var alpha = /[a-zA-Z]/;
-
 	var tokens = [];
-	var currentToken = '';
+	var currentToken = "";
 
-	var currentIsAlpha = alpha.test( text.charAt( 0 ) );
+	var currentIsAlpha = this.isAlpha( text.charAt( 0 ) );
 	var prevIsAlpha = !currentIsAlpha;
 	
 	for( var ix = 0; ix < text.length; ++ix ){
@@ -175,13 +180,14 @@ var Lexer = {
 	    var c = text.charAt( ix );
 
 	    prevIsAlpha = currentIsAlpha;
-	    currentIsAlpha = alpha.test( c )
+	    currentIsAlpha = this.isAlpha( c );
 
 	    if( ( prevIsAlpha && currentIsAlpha )
 		|| ( !prevIsAlpha && !currentIsAlpha ) ){
 
 		currentToken += c;
 	    }
+
 	    else{
 
 		tokens.push( currentToken );
