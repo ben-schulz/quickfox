@@ -163,7 +163,6 @@ var Lexer = {
 	}
 
 	var alpha = /[a-zA-Z]/;
-	var separator = /[^a-zA-Z]/;	
 
 	var tokens = [];
 	var currentToken = '';
