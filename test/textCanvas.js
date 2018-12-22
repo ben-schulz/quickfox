@@ -328,6 +328,31 @@ describe( "TextCanvas", function(){
 	});
     });
 
+    describe( "saveTriple event", function(){
+
+	it( "marks referenced lexemes as referents", function(){
+
+	    var canvas = new TextCanvas( document );
+
+	    var subject = new Lexeme( "foo" );
+	    var object = new Lexeme( "bar" );
+	    var relation = new Lexeme( "cat" );
+
+	    canvas.addLexeme( subject );
+	    canvas.addLexeme( object );
+	    canvas.addLexeme( relation );
+
+	    canvas.lexemeSelected( subject );
+	    canvas.lexemeSelected( object );
+	    canvas.lexemeSelected( relation );
+
+	    canvas.saveTriple();
+
+	    assert.isTrue( subject.isReferent );
+	    assert.isTrue( relation.isReferent );
+	    assert.isTrue( object.isReferent );
+	} );
+    } );
 
     describe( "subscribe", function(){
 

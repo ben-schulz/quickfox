@@ -33,6 +33,17 @@ describe( "Lexeme", function(){
 	    assert.isTrue(
 		lex.element.classList.contains( "referent" ) );
 	} );
+
+	it( "handles saveTriple as reference", function(){
+
+	    var lex = new Lexeme( "foo" );
+
+	    lex.element.dispatchEvent(
+		new CustomEvent( "saveTriple" ) );
+
+	    assert.isTrue(
+		lex.element.classList.contains( "referent" ) );
+	} );
     } );
 
     describe( "on reference removed", function(){

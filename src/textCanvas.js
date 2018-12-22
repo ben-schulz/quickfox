@@ -192,6 +192,8 @@ class TextCanvas{
     
     _unfocusLexeme( lex ){
 
+	this.unsubscribe( lex.element );
+
 	if( lex.isSubject ){
 
 	    this.tripleState.vacateSubject();
@@ -213,6 +215,8 @@ class TextCanvas{
 	var next = this.tripleState.fillNext( lex.text );
 
 	this.highlights.push( lex );
+
+	this.subscribe( "saveTriple", lex.element );
 
 	if( next === TripleComponent.Subject ){
 
@@ -290,6 +294,22 @@ class TextCanvas{
 	this.subscribers[ eventName ].push( listener );
     }
 
+    unsubscribe( eventName, listener ){
+
+	if( eventName in this.subscribers ){
+
+	    var listenerIndex =
+		this.subscribers[ eventName ].index( listener );
+
+	    if( -1 === listenerIndex ){
+		return;
+	    }
+
+	    this.subscribers[ eventName ].splice(
+		listenerIndex, 1 );
+	}
+    }
+
     constructor( document ){
 
 	this.elementType = "div";
@@ -298,7 +318,7 @@ class TextCanvas{
 
 	this.highlights = [];
 
-	this.subscribers = {};
+	this.subscribers = { "saveTriple": [] };
 
 	this.tripleState = new TripleState();
 

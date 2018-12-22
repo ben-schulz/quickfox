@@ -96,18 +96,22 @@ class Lexeme{
     showAsReferent(){
 
 	this.element.classList.add( LexemeState.Referent );
+	this.isReferent = true;
     }
 
 
     showAsNonReferent(){
 
 	this.element.classList.remove( LexemeState.Referent );
+	this.isReferent = false;
     }
 
 
     constructor( text ){
 
 	this.text = text;
+
+	this.isReferent = false;
 
 	this.element = (function(){
 
@@ -139,6 +143,13 @@ class Lexeme{
 			"detail": { "target": this } } )
 		);
 	    });
+
+	this.element.addEventListener(
+	    "saveTriple", event => {
+
+		this.showAsReferent();
+
+	    } );
     }
 }
 

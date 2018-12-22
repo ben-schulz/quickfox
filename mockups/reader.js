@@ -109,6 +109,8 @@ fileSelector.addEventListener(
 		}
 
 		tripleView.appendChild( newItem );
+
+		canvas.saveTriple();
 	    };
 
 	    var buffer = new TextBuffer( document, "div" );
