@@ -95,12 +95,11 @@ fileSelector.addEventListener(
 
 		store.addTriple( triple );
 
-		var subtext = document.createTextNode(
-		    store.toJson() );
+		var subtext = new TreeView( store.triples );
 
-		var newItem = document.createElement( "p" );
+		var newItem = document.createElement( "div" );
 
-		newItem.appendChild( subtext );
+		newItem.appendChild( subtext.element );
 
 		if( tripleView.firstChild ){
 

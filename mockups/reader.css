@@ -62,3 +62,9 @@ span{
 
     background-color: #69b56c;
 }
+
+.jsonTreeView{
+
+    margin-left: 32pt;
+    display: block;
+}
