@@ -34,19 +34,29 @@ describe( "TreeView", function(){
 
 	    var treeView = new TreeView( jsonInput );
 
-	    var assertChildStartsWith = function( refs ){
+	    var assertTextNodesCorrect =
+		function( obj, tree ){
 
-		var elementText =
-		    treeView.getChild( refs )
-		    .element.innerText
+		Object.keys( obj ).forEach( k => {
 
-		var prefix = refs.join( ":{" );
+		    var expectedPrefix = k + ":{";
 
-		assert.isTrue( elementText.startsWith( prefix )  );
+		    var k_child = tree.getChild( [ k ] );
+
+		    var actualText = k_child.element.innerText;
+
+		    assert.isTrue(
+			actualText.startsWith( expectedPrefix ) );
+
+		    assertTextNodesCorrect( obj[ k ], k_child );
+
+		} );
 	    };
 
-	    assertChildStartsWith( [ "subject0" ] );
+	    assertTextNodesCorrect( jsonInput, treeView );
 
 	} );
+
     } );
+
 } );
