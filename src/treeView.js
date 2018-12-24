@@ -1,9 +1,22 @@
 class TreeView{
 
+    getChild( refList ){
+
+	var nextRef = refList[ 0 ];
+	var nextValue = this.children[ nextRef ];
+
+	if( 1 == refList.length ){
+
+	    return nextValue;
+	}
+
+	return nextValue.getChild( refList.slice( 1 ) );
+    }
+
     constructor( json, refs=[] ){
 
 	this.refs = refs;
-	this.children = [];
+	this.children = {};
 	
 	this.elementType = "div";
 	
@@ -40,8 +53,6 @@ class TreeView{
 		    var subtree = new TreeView( json[ k ], refs )
 		    refs.pop()
 
-		    this.children.push( subtree );
-
 		    el.append( subtree.element );
 		}
 
@@ -58,6 +69,8 @@ class TreeView{
 
 		    el.append( valueDiv );
 		}
+
+		this.children[ k ] = subtree;
 	    } );
 
 	    el.append( closeBrace );
