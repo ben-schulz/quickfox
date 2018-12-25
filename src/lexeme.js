@@ -106,6 +106,17 @@ class Lexeme{
 	this.isReferent = false;
     }
 
+    mouseover(){
+
+	if( this.isReferent ){
+	    this.tooltip.style.display = "block";
+	}
+    }
+
+    mouseleave(){
+
+	this.tooltip.style.display = "none";
+    }
 
     constructor( text ){
 
@@ -113,7 +124,7 @@ class Lexeme{
 
 	this.isReferent = false;
 
-	this.element = (function(){
+	this.element = (() => {
 
 	    var displayText =
 		document.createTextNode( text );
@@ -125,6 +136,17 @@ class Lexeme{
 	    textSpan.appendChild( displayText );
 
 	    return textSpan;
+
+	})();
+
+	this.tooltip = (() => {
+
+	    var tooltip = document.createElement( "div" );
+
+	    tooltip.classList.add( "tripletooltip" );
+	    tooltip.style.display = "none";
+
+	    return tooltip;
 
 	})();
 
@@ -149,6 +171,18 @@ class Lexeme{
 
 		this.showAsReferent();
 
+	    } );
+
+	this.element.addEventListener(
+	    "mouseover", event => {
+
+		this.mouseover();
+	    } );
+
+	this.element.addEventListener(
+	    "mouseleave", event => {
+
+		this.mouseleave();
 	    } );
     }
 }

@@ -19,6 +19,14 @@ span{
     overflow-wrap: break-word;
 }
 
+.tripletooltip{
+
+    height: 20px;
+    width: 27px;
+
+    background-color: green;
+}
+
 #tripleStore{
 
     top: 0;

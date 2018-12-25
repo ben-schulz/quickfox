@@ -22,6 +22,51 @@ describe( "Lexeme", function(){
     } );
 
 
+    describe( "on mouseover", function(){
+
+	describe( "if referent", function() {
+
+	    it( "shows its tooltip", function(){
+
+		var lex = new Lexeme( "foo" );
+
+		lex.showAsReferent();
+		lex.mouseover();
+
+		assert.equal( lex.tooltip.style.display, "block" );
+	    } );
+
+	} );
+
+	describe( "if not referent", function() {
+
+	    it( "keeps tooltip hidden", function(){
+
+		var lex = new Lexeme( "foo" );
+
+		lex.mouseover();
+
+		assert.equal( lex.tooltip.style.display, "none" );
+	    } );
+
+	} );
+    } );
+
+    describe( "on mouseout", function(){
+
+	it( "hides the tooltip", function(){
+
+	    var lex = new Lexeme( "foo" );
+
+	    lex.mouseover();
+	    lex.mouseleave();
+
+	    assert.equal( lex.tooltip.style.display, "none" );
+	} );
+
+    } );
+
+
     describe( "on reference made", function(){
 
 	it( "classifies page element as referent", function(){
