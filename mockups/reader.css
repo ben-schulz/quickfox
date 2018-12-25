@@ -41,6 +41,11 @@ span{
 
 }
 
+.lexeme{
+
+    display: inline-block;
+}
+
 .unfocused{
 
     background-color: transparent;

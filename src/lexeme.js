@@ -133,6 +133,8 @@ class Lexeme{
 
 	    textSpan.value = text;
 
+	    textSpan.classList.add( "lexeme" );
+
 	    textSpan.appendChild( displayText );
 
 	    return textSpan;
@@ -147,7 +149,6 @@ class Lexeme{
 	    tooltip.style.display = "none";
 
 	    return tooltip;
-
 	})();
 
 	this.clearHighlights();
