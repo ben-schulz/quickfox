@@ -22,6 +22,17 @@ describe( "Lexeme", function(){
     } );
 
 
+    describe( "length", function(){
+
+	it( "returns number of characters in the text", function(){
+
+	    var text = "foo";
+	    var lex = new Lexeme( text );
+
+	    assert.equal( lex.length, text.length );
+	} );
+    } );
+
     describe( "on mouseover", function(){
 
 	describe( "if referent", function() {

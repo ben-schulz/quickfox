@@ -121,6 +121,7 @@ class Lexeme{
     constructor( text ){
 
 	this.text = text;
+	this.length = text.length;
 
 	this.isReferent = false;
 
