@@ -316,7 +316,18 @@ class TextCanvas{
 	}
     }
 
+    setMaxLineChars( charCount ){
+
+	this.maxLineChars = charCount;
+    }
+
     constructor( document ){
+
+	var defaultLineChars = 40;
+
+	this.nextColumn = 0;
+	this.maxLineChars = defaultLineChars;
+	this.nextLine = 0;
 
 	this.elementType = "div";
 	this.element = document.createElement(
@@ -353,5 +364,19 @@ class TextCanvas{
 	}
 
 	this.lexTable[ lex.text ].push( lex );
+
+	var lineCharsRemaining =
+	    ( this.maxLineChars - this.nextColumn );
+
+	if( lex.length > lineCharsRemaining ){
+
+	    this.nextColumn = 0;
+	    this.nextLine += 1;
+	}
+
+	lex.columnStart = this.nextColumn;
+	lex.lineNumber = this.nextLine;
+
+	this.nextColumn += lex.length;
     }
 }

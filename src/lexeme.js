@@ -194,6 +194,7 @@ class Separator{
     constructor( text ){
 
 	this.text = text;
+	this.length = text.length;
 
 	this.element = (function(){
 

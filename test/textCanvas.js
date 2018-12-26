@@ -27,7 +27,6 @@ var assertRelationFocused = function( lexeme ){
     assertLexemeState( lexeme, LexemeState.RelationFocus );
 };
 
-
 describe( "TextCanvas", function(){
 
     describe( "rendered element", function(){
@@ -48,6 +47,52 @@ describe( "TextCanvas", function(){
 	    assert.equal( "world", secondChild.textContent );
 	});
     });
+
+    describe( "addLexeme", function(){
+
+	it( "sets start column", function(){
+
+	    var canvas = new TextCanvas( document );
+
+	    var lex0 = new Lexeme( "foo" );
+	    canvas.addLexeme( lex0 );
+
+	    var space = new Separator(" ");
+	    canvas.addLexeme( space );
+
+	    var lex1 = new Lexeme( "bar" );
+	    canvas.addLexeme( lex1 );
+
+	    assert.equal( 0, lex0.columnStart );
+
+	    assert.equal(
+		( lex0.length + space.length ),
+		lex1.columnStart );
+
+	} );
+
+	it( "breaks lines at given character max", function(){
+
+	    var canvas = new TextCanvas( document );
+
+	    canvas.setMaxLineChars( 5 );
+
+	    var lex0 = new Lexeme( "foo" );
+	    canvas.addLexeme( lex0 );
+
+	    var space = new Separator(" ");
+	    canvas.addLexeme( space );
+
+	    var lex1 = new Lexeme( "bar" );
+	    canvas.addLexeme( lex1 );
+
+	    assert.equal( 0, lex0.lineNumber );
+
+	    assert.equal( 0, lex1.columnStart );
+	    assert.equal( 1, lex1.lineNumber );
+	} );
+    } );
+
 
     describe( "TripleState", function(){
 
