@@ -80,7 +80,7 @@ describe( "TextCanvas", function(){
 	    var lex0 = new Lexeme( "foo" );
 	    canvas.addLexeme( lex0 );
 
-	    var space = new Separator(" ");
+	    var space = new Separator( " " );
 	    canvas.addLexeme( space );
 
 	    var lex1 = new Lexeme( "bar" );
