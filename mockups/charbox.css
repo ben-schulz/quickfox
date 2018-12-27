@@ -1,0 +1,56 @@
+#tooltiplayer{
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    height: 100%;
+    width: 100%;
+}
+
+#textlayer{
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    height: 100%;
+    width: 100%;
+}
+
+#pageContainer{
+    position: absolute;
+
+    height: 100%;
+    width: 100%;
+
+    top: 2em;
+    left: 2em;
+}
+
+.tooltip{
+
+    position: relative;
+}
+
+.charbox{
+
+    background-color: lightgreen;
+    font-family: monospace;
+    
+    display: inline-block;
+    
+    width: 1ch;
+    height: 2ch;
+
+    min-width: 1ch;
+    max-width: 1ch;
+
+    min-height: 2ch;
+    max-height: 2ch;
+
+    padding: 0;
+    margin: 0;
+}
