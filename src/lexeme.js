@@ -113,11 +113,14 @@ class Lexeme{
 
 	    var rect = this.element.getBoundingClientRect();
 
-	    this.tooltip.style.left =
-		( rect.right + window.scrollX ) + "px";
+	    var tooltipLeftPixels = rect.right + window.scrollX;
 
-	    this.tooltip.style.top =
-		( rect.bottom + window.scrollY - 62) + "px" ;
+	    var tooltipTopPixels =
+		rect.bottom + window.scrollY - this.offsetY;
+
+	    this.tooltip.style.left = tooltipLeftPixels + "px";
+
+	    this.tooltip.style.top = tooltipTopPixels + "px" ;
 	}
     }
 
@@ -132,6 +135,8 @@ class Lexeme{
 	this.length = text.length;
 
 	this.isReferent = false;
+
+	this.offsetY = 0;
 
 	this.element = (() => {
 

@@ -385,6 +385,8 @@ class TextCanvas{
 	lex.columnStart = this.nextColumn;
 	lex.lineNumber = this.nextLine;
 
+	lex.offsetY = this.boundingRect.top;
+
 	this.nextColumn += lex.length;
 
     }
