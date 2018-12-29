@@ -330,7 +330,11 @@ class TextCanvas{
 	this.nextLine = 0;
 
 	this.elementType = "div";
-	this.element = document.createElement(
+
+	this.textLayer = document.createElement(
+	    this.elementType );
+
+	this.tooltipLayer = document.createElement(
 	    this.elementType );
 
 	this.highlights = [];
@@ -341,13 +345,13 @@ class TextCanvas{
 
 	this.tripleState = new TripleState();
 
-	this.element.addEventListener(
+	this.textLayer.addEventListener(
 	    "clearHighlights", event => {
 
 		this.clearHighlights();
 	});
 
-	this.element.addEventListener(
+	this.textLayer.addEventListener(
 	    "lexemeSelected", event => {
 
 		this.lexemeSelected( event.detail.target );
@@ -356,7 +360,11 @@ class TextCanvas{
 
     addLexeme( lex ){
 
-	this.element.appendChild( lex.element );
+	this.textLayer.appendChild( lex.element );
+
+	if( lex.tooltip ){
+	    this.tooltipLayer.appendChild( lex.tooltip );
+	}
 
 	if( !( lex.text in this.lexTable  ) ){
 
@@ -378,5 +386,6 @@ class TextCanvas{
 	lex.lineNumber = this.nextLine;
 
 	this.nextColumn += lex.length;
+
     }
 }

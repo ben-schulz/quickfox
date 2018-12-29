@@ -48,11 +48,15 @@ fileSelector.addEventListener(
 	var selectedFile = fileSelector.files[0];
 
 	var canvas = new TextCanvas( document );
-	var outputDiv = canvas.element;
 
-	outputDiv.id = "fileContents";
+	canvas.textLayer.id = "fileContents";
+	canvas.tooltipLayer.id = "tooltipLayer";
 
-	document.body.appendChild( outputDiv );
+	document.body.appendChild( canvas.textLayer );
+	document.body.appendChild( canvas.tooltipLayer );
+
+	canvas.boundingRect =
+	    canvas.textLayer.getBoundingClientRect();
 
 	var fileReader = new FileReader();
 
@@ -77,7 +81,7 @@ fileSelector.addEventListener(
 		var event = new CustomEvent(
 		    "clearHighlights" );
 
-		canvas.element.dispatchEvent( event );
+		canvas.textLayer.dispatchEvent( event );
 	    };
 
 	    var onEnter = function( contents ){

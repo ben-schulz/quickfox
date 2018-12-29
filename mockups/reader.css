@@ -1,7 +1,22 @@
-span{
+.charbox{
 
-    padding: 2pt;
+    font-family: monospace;
+    
+    display: inline-block;
+    
+    width: 1ch;
+    height: 2ch;
 
+    min-width: 1ch;
+    max-width: 1ch;
+
+    min-height: 2ch;
+    max-height: 2ch;
+
+    padding: 0;
+    margin: 0;
+
+    border: 1pt;
 }
 
 #inputFile{
@@ -11,20 +26,36 @@ span{
 
 #fileContents{
 
+    position: absolute;
+    
     top: 10%;
     left: 0;
     width: 50%;
     height: 100%;
-    
-    overflow-wrap: break-word;
+
+    z-index: 2;
+}
+
+
+#tooltipLayer{
+
+    position: absolute;
+
+    top: 10%;
+    left: 0;
+    width: 50%;
+    height: 100%;
+
+    z-index: 1;
 }
 
 .tripletooltip{
 
-    height: 20px;
-    width: 27px;
+    font-family: monospace;
 
-    background-color: green;
+    background-color: lightgreen;
+
+    position: absolute;
 }
 
 #tripleStore{

@@ -38,12 +38,12 @@ describe( "TextCanvas", function(){
 	    canvas.addLexeme( new Lexeme( "hello" ) );
 	    canvas.addLexeme( new Lexeme( "world" ) );
 
-	    assert.equal( 2, canvas.element.childNodes.length );
+	    assert.equal( 2, canvas.textLayer.childNodes.length );
 
-	    var firstChild = canvas.element.childNodes[0];
+	    var firstChild = canvas.textLayer.childNodes[0];
 	    assert.equal( "hello", firstChild.textContent );
 
-	    var secondChild = canvas.element.childNodes[1];
+	    var secondChild = canvas.textLayer.childNodes[1];
 	    assert.equal( "world", secondChild.textContent );
 	});
     });
@@ -359,7 +359,7 @@ describe( "TextCanvas", function(){
 	    highlight1.element.click();
 	    highlight1.element.click();
 
-	    canvas.element.dispatchEvent(
+	    canvas.textLayer.dispatchEvent(
 		new CustomEvent( "clearHighlights" )
 	    );
 

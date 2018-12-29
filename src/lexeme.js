@@ -110,6 +110,14 @@ class Lexeme{
 
 	if( this.isReferent ){
 	    this.tooltip.style.display = "block";
+
+	    var rect = this.element.getBoundingClientRect();
+
+	    this.tooltip.style.left =
+		( rect.right + window.scrollX ) + "px";
+
+	    this.tooltip.style.top =
+		( rect.bottom + window.scrollY - 62) + "px" ;
 	}
     }
 
@@ -132,11 +140,15 @@ class Lexeme{
 
 	    var textSpan = document.createElement( "span" );
 
+	    for( var ix = 0; ix < text.length; ++ix ){
+
+		textSpan.appendChild(
+		    new CharBox( text.charAt( ix ) ).element );
+	    }
+
 	    textSpan.value = text;
 
 	    textSpan.classList.add( "lexeme" );
-
-	    textSpan.appendChild( displayText );
 
 	    return textSpan;
 
@@ -148,6 +160,9 @@ class Lexeme{
 
 	    tooltip.classList.add( "tripletooltip" );
 	    tooltip.style.display = "none";
+
+	    tooltip.appendChild(
+		document.createTextNode( this.text ) );
 
 	    return tooltip;
 	})();
