@@ -97,6 +97,7 @@ class Lexeme{
 
 	this.element.classList.add( LexemeState.Referent );
 	this.isReferent = true;
+
     }
 
 
@@ -166,9 +167,6 @@ class Lexeme{
 	    tooltip.classList.add( "tripletooltip" );
 	    tooltip.style.display = "none";
 
-	    tooltip.appendChild(
-		document.createTextNode( this.text ) );
-
 	    return tooltip;
 	})();
 
@@ -193,7 +191,22 @@ class Lexeme{
 
 		this.showAsReferent();
 
-	    } );
+		if( event.detail ){
+
+		    var newText = document.createTextNode(
+			event.detail.subject
+			    + " -> " + event.detail.relation
+			    + " -> " + event.detail.object
+		    );
+
+		    var newRow = document.createElement( "p" );
+
+		    newRow.appendChild( newText );
+		    this.tooltip.appendChild( newRow );
+		}
+
+	} );
+
 
 	this.element.addEventListener(
 	    "mouseover", event => {
