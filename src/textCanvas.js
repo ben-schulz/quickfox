@@ -331,6 +331,13 @@ class TextCanvas{
 
 	this.elementType = "div";
 
+	this.boundingRect = {
+	    "top": 0,
+	    "right": 0,
+	    "bottom": 0,
+	    "left": 0
+	};
+
 	this.textLayer = document.createElement(
 	    this.elementType );
 
