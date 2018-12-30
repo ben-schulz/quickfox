@@ -1,5 +1,22 @@
 class TripleTree{
 
+    contains( key ){
+
+	return key in this.nodes;
+    }
+
+    ref( keys ){
+
+	var result = this.nodes;
+
+	keys.forEach( k => {
+
+	    result = result[ k ];
+	} );
+
+	return result;
+    }
+
     insert( triple ){
 
 	var first = triple[ 0 ];
@@ -39,6 +56,29 @@ class TripleStore{
     }
 
     addTriple( t ){
+
+	this.bySubject.insert( [
+
+	    t.subject,
+	    t.relation,
+	    t.object
+	] );
+
+
+	this.byRelation.insert( [
+
+	    t.relation,
+	    t.subject,
+	    t.object
+	] );
+
+	this.byObject.insert( [
+
+	    t.object,
+	    t.subject,
+	    t.relation
+	] );
+
 
 	if( !this.triples[ t.subject ] ){
 
@@ -87,6 +127,10 @@ class TripleStore{
     constructor(){
 
 	this.triples = {};
+
+	this.bySubject = new TripleTree();
+	this.byRelation = new TripleTree();
+	this.byObject = new TripleTree();
     }
 }
 

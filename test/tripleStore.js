@@ -47,16 +47,13 @@ describe( "TripleStore", function(){
 		"object": "cat"
 	    } );
 
-/*
-	    assert.isTrue( "foo" in store.bySubject );
+	    assert.isTrue( store.bySubject.contains( "foo" ) );
 
-	    assert.equal(
-		"bar", store.bySubject[ "foo" ].relation );
+	    assert.isTrue(
+		"bar" in store.bySubject.ref( [ "foo" ] ) );
 
-	    assert.equal(
-		"bar", store.byObject[ "foo" ].object );
-*/
-
+	    assert.isTrue(
+		"cat" in store.bySubject.ref( [ "foo", "bar" ] ) );
 	} );
 
 
@@ -70,7 +67,13 @@ describe( "TripleStore", function(){
 		"object": "cat"
 	    } );
 
-//	    assert.isTrue( "bar" in store.byRelation );
+	    assert.isTrue( store.byRelation.contains( "bar" ) );
+
+	    assert.isTrue(
+		"foo" in store.byRelation.ref( [ "bar" ] ) );
+
+	    assert.isTrue(
+		"cat" in store.byRelation.ref( [ "bar", "foo" ] ) );
 
 	} );
 
@@ -85,10 +88,14 @@ describe( "TripleStore", function(){
 		"object": "cat"
 	    } );
 
-//	    assert.isTrue( "cat" in store.byObject );
+	    assert.isTrue( store.byObject.contains( "cat" ) );
 
+	    assert.isTrue(
+		"foo" in store.byObject.ref( [ "cat" ] ) );
+
+	    assert.isTrue(
+		"bar" in store.byObject.ref( [ "cat", "foo" ] ) );
 	} );
-
 
     } );
 
