@@ -107,7 +107,7 @@ class TripleStore{
 
 	var result = [];
 
-	var keys = Object.keys( this.triples );
+	var keys = Object.keys( this.bySubject.nodes );
 
 	keys.forEach( k => {
 
@@ -123,6 +123,50 @@ class TripleStore{
 
 	return result;
     }
+
+    queryRelation( pred ){
+
+	var result = [];
+
+	var keys = Object.keys( this.byRelation.nodes );
+
+	keys.forEach( k => {
+
+	    if( pred( k ) ){
+
+		var triple = {};
+		triple[ k ] = this.byRelation.nodes[ k ];
+
+		result.push( triple );
+	    }
+
+	} );
+
+	return result;
+    }
+
+
+    queryObject( pred ){
+
+	var result = [];
+
+	var keys = Object.keys( this.byObject.nodes );
+
+	keys.forEach( k => {
+
+	    if( pred( k ) ){
+
+		var triple = {};
+		triple[ k ] = this.byObject.nodes[ k ];
+
+		result.push( triple );
+	    }
+
+	} );
+
+	return result;
+    }
+
 
     constructor(){
 

@@ -15,6 +15,7 @@ describe( "TripleTree", function(){
     } );
 } );
 
+
 describe( "TripleStore", function(){
 
     describe( "toJson method", function(){
@@ -133,6 +134,80 @@ describe( "TripleStore", function(){
 
 	    assert.isTrue(
 		"cat" in results[ 0 ][ "foo" ][ "bar" ]  );
+
+	} );
+    } );
+
+    describe( "queryRelation method", function(){
+
+	it( "returns relation matches", function(){
+
+	    var store = new TripleStore();
+
+	    store.addTriple( {
+
+		"subject": "foo",
+		"relation": "bar",
+		"object": "cat"
+	    } );
+
+	    store.addTriple( {
+
+		"subject": "no match",
+		"relation": "no match",
+		"object": "no match"
+	    } );
+
+	    var results = store.queryRelation(
+		function( s ){
+		    return s === "bar"
+		}
+	    );
+
+	    assert.isTrue( "bar" in results[ 0 ]  );
+
+	    assert.isTrue(
+		"foo" in results[ 0 ][ "bar" ]  );
+
+	    assert.isTrue(
+		"cat" in results[ 0 ][ "bar" ][ "foo" ]  );
+
+	} );
+    } );
+
+    describe( "queryObject method", function(){
+
+	it( "returns object matches", function(){
+
+	    var store = new TripleStore();
+
+	    store.addTriple( {
+
+		"subject": "foo",
+		"relation": "bar",
+		"object": "cat"
+	    } );
+
+	    store.addTriple( {
+
+		"subject": "no match",
+		"relation": "no match",
+		"object": "no match"
+	    } );
+
+	    var results = store.queryObject(
+		function( s ){
+		    return s === "cat"
+		}
+	    );
+
+	    assert.isTrue( "cat" in results[ 0 ]  );
+
+	    assert.isTrue(
+		"foo" in results[ 0 ][ "cat" ]  );
+
+	    assert.isTrue(
+		"bar" in results[ 0 ][ "cat" ][ "foo" ]  );
 
 	} );
     } );
