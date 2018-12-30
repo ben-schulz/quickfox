@@ -1,3 +1,31 @@
+class TripleTree{
+
+    insert( triple ){
+
+	var first = triple[ 0 ];
+
+	if( !( first in this.nodes ) ){
+
+	    this.nodes[ first ] = {};
+	}
+
+	var second = triple[ 1 ];
+
+	if( !( second in this.nodes[ first ] ) ){
+
+	    this.nodes[ first ][ second ] = {};
+	}
+
+	var third = triple[ 2 ];
+	this.nodes[ first ][ second ][ third ] = third;
+    }
+
+    constructor(){
+
+	this.nodes = {};
+    }
+}
+
 class TripleStore{
 
     static isReferent( token ){
