@@ -34,6 +34,28 @@ class TripleStore{
 	return JSON.stringify( this.triples );
     }
 
+
+    querySubject( pred ){
+
+	var result = [];
+
+	var keys = Object.keys( this.triples );
+
+	keys.forEach( k => {
+
+	    if( pred( k ) ){
+
+		var triple = {};
+		triple[ k ] = this.triples[ k ];
+
+		result.push( triple );
+	    }
+
+	} );
+
+	return result;
+    }
+
     constructor(){
 
 	this.triples = {};
