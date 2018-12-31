@@ -143,6 +143,50 @@ class TripleState{
 }
 
 
+class LayeredDisplay{
+
+    toggle(){
+
+	var next = this.layers.pop();
+	this.layers.unshift( next );
+
+	this.active.style.zIndex = this.inactiveZ;
+
+	this.active = next;
+	this.active.style.zIndex = this.activeZ;
+    }
+
+    constructor(){
+
+	this.activeZ = 2;
+	this.inactiveZ = 1
+
+	this.elementType = "div";
+
+	this.container = document.createElement( this.elementType );
+
+	this.foreground =
+	    document.createElement( this.elementType );
+
+	this.background =
+	    document.createElement( this.elementType );
+
+	this.container.appendChild( this.foreground );
+	this.container.appendChild( this.background );
+
+	this.container.addEventListener( "toggletooltip", event => {
+
+	    this.toggle();
+	    console.info( "layer toggle" );
+	} );
+
+	this.layers = [ this.foreground, this.background ];
+
+	this.active = this.foreground;
+    }
+}
+
+
 class TextCanvas{
 
     get hasSubject(){
@@ -338,11 +382,10 @@ class TextCanvas{
 	    "left": 0
 	};
 
-	this.textLayer = document.createElement(
-	    this.elementType );
+	this.display = new LayeredDisplay();
 
-	this.tooltipLayer = document.createElement(
-	    this.elementType );
+	this.textLayer = this.display.background;
+	this.tooltipLayer = this.display.foreground;
 
 	this.highlights = [];
 
@@ -357,6 +400,12 @@ class TextCanvas{
 
 		this.clearHighlights();
 	});
+
+	this.textLayer.addEventListener(
+	    "toggletooltip", event => {
+
+		this.display.toggle();
+	    } );
 
 	this.textLayer.addEventListener(
 	    "lexemeSelected", event => {

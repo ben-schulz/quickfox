@@ -110,6 +110,7 @@ class Lexeme{
     mouseover(){
 
 	if( this.isReferent ){
+
 	    this.tooltip.style.display = "block";
 
 	    var rect = this.element.getBoundingClientRect();
@@ -122,12 +123,31 @@ class Lexeme{
 	    this.tooltip.style.left = tooltipLeftPixels + "px";
 
 	    this.tooltip.style.top = tooltipTopPixels + "px" ;
+
+	    this.element.dispatchEvent(
+
+		    new CustomEvent( "toggletooltip", {
+
+			"bubbles": true,
+			"detail": { "target": this } } )
+		);
 	}
     }
 
     mouseleave(){
 
-	this.tooltip.style.display = "none";
+	if( this.isReferent ){
+
+	    this.tooltip.style.display = "none";
+
+	    this.element.dispatchEvent(
+
+		new CustomEvent( "toggletooltip", {
+
+		    "bubbles": true,
+		    "detail": { "target": this } } )
+	    );
+	}
     }
 
     constructor( text ){
@@ -209,7 +229,7 @@ class Lexeme{
 
 
 	this.element.addEventListener(
-	    "mouseover", event => {
+	    "mouseenter", event => {
 
 		this.mouseover();
 	    } );

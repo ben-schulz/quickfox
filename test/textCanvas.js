@@ -27,6 +27,77 @@ var assertRelationFocused = function( lexeme ){
     assertLexemeState( lexeme, LexemeState.RelationFocus );
 };
 
+describe( "LayeredDisplay", function(){
+
+    describe( "on toggle", function(){
+
+	it( "switches foreground to background", function(){
+
+	    var display = new LayeredDisplay();
+
+	    display.foreground.appendChild(
+		document.createTextNode( "foreground text" ) );
+
+	    display.background.appendChild(
+		document.createTextNode( "background text" ) );
+
+	    assert.equal(
+		"foreground text",
+		display.active.firstChild.textContent );
+
+	    display.toggle();
+
+	    assert.equal(
+		"background text",
+		display.active.firstChild.textContent );
+	} );
+
+
+	it( "switches background to foreground", function(){
+
+	    var display = new LayeredDisplay();
+
+	    display.foreground.appendChild(
+		document.createTextNode( "foreground text" ) );
+
+	    display.background.appendChild(
+		document.createTextNode( "background text" ) );
+
+	    display.toggle();
+	    display.toggle();
+
+	    assert.equal(
+		"foreground text",
+		display.active.firstChild.textContent );
+	} );
+
+
+	it( "moves active layer to higher z-index", function(){
+
+	    var display = new LayeredDisplay();
+
+	    display.toggle();
+
+	    assert.equal(
+		display.activeZ,
+		display.background.style.zIndex );
+	} );
+
+
+	it( "moves inactive layer to lower z-index", function(){
+
+	    var display = new LayeredDisplay();
+
+	    display.toggle();
+
+	    assert.equal(
+		display.inactiveZ,
+		display.foreground.style.zIndex );
+	} );
+
+    } );
+} );
+
 describe( "TextCanvas", function(){
 
     describe( "rendered element", function(){
