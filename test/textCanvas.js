@@ -29,6 +29,35 @@ var assertRelationFocused = function( lexeme ){
 
 describe( "LayeredDisplay", function(){
 
+    describe( "on instantiation", function(){
+
+	it( "places foreground at higher z-index", function(){
+
+	    var display = new LayeredDisplay();
+
+	    assert.isTrue(
+		display.activeZ > display.inactiveZ );
+
+
+	    assert.equal(
+		display.foreground.style.zIndex,
+		display.activeZ );
+	} );
+
+	it( "places background at lower z-index", function(){
+
+	    var display = new LayeredDisplay();
+
+	    assert.isTrue(
+		display.activeZ > display.inactiveZ );
+
+	    assert.equal(
+		display.background.style.zIndex,
+		display.inactiveZ );
+	} );
+
+    } );
+
     describe( "on toggle", function(){
 
 	it( "switches foreground to background", function(){
