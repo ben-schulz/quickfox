@@ -126,7 +126,7 @@ class Lexeme{
 
 	    this.element.dispatchEvent(
 
-		    new CustomEvent( "toggletooltip", {
+		    new CustomEvent( "tooltipactive", {
 
 			"bubbles": true,
 			"detail": { "target": this } } )
@@ -142,7 +142,7 @@ class Lexeme{
 
 	    this.element.dispatchEvent(
 
-		new CustomEvent( "toggletooltip", {
+		new CustomEvent( "tooltipinactive", {
 
 		    "bubbles": true,
 		    "detail": { "target": this } } )

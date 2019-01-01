@@ -147,14 +147,35 @@ class LayeredDisplay{
 
     toggle(){
 
-	var next = this.layers.pop();
-	next.style.zIndex = this.activeZ;
+	if( this._reversed ){
 
-	var prev = this.layers.slice( -1 )[ 0 ];
-	prev.style.zIndex = this.inactiveZ;
+	    this.moveForegroundToFront();
+	    this._reversed = false;
+	}
 
-	this.layers.unshift( next );
-	this.active = next;
+	else{
+
+	    this.moveBackgroundToFront();
+	    this._reversed = true;
+	}
+    }
+
+    moveForegroundToFront(){
+
+	this.active = this.foreground;
+	this._reversed = false;
+
+	this.foreground.style.zIndex = this.activeZ;
+	this.background.style.zIndex = this.inactiveZ;
+    }
+
+    moveBackgroundToFront(){
+
+	this.active = this.background;
+	this._reversed = true;
+
+	this.foreground.style.zIndex = this.inactiveZ;
+	this.background.style.zIndex = this.activeZ;
     }
 
     constructor(){
@@ -164,30 +185,33 @@ class LayeredDisplay{
 
 	this.elementType = "div";
 
-	this.container = document.createElement( this.elementType );
+	this._reversed = false;
+
+	this.container = document.createElement(
+		this.elementType );
 
 	this.foreground =
 	    document.createElement( this.elementType );
 
-	this.foreground.style.zIndex = this.activeZ;
-
 	this.background =
 	    document.createElement( this.elementType );
-
-	this.background.style.zIndex = this.inactiveZ;
 
 	this.container.appendChild( this.foreground );
 	this.container.appendChild( this.background );
 
-	this.container.addEventListener( "toggletooltip", event => {
+	this.container.addEventListener(
+	    "tooltipactive", event => {
 
-	    this.toggle();
-	    console.info( "layer toggle" );
+		this.moveBackgroundToFront();
 	} );
 
-	this.layers = [ this.foreground, this.background ];
+	this.container.addEventListener(
+	    "tooltipinactive", event => {
 
-	this.active = this.foreground;
+		this.moveForegroundToFront();
+	} );
+
+	this.moveForegroundToFront();
     }
 }
 
@@ -407,9 +431,15 @@ class TextCanvas{
 	});
 
 	this.textLayer.addEventListener(
-	    "toggletooltip", event => {
+	    "tooltipinactive", event => {
 
-		this.display.toggle();
+		this.display.moveForegroundToFront();
+	    } );
+
+	this.textLayer.addEventListener(
+	    "tooltipactive", event => {
+
+		this.display.moveBackgroundToFront();
 	    } );
 
 	this.textLayer.addEventListener(

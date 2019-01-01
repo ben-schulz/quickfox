@@ -58,6 +58,60 @@ describe( "LayeredDisplay", function(){
 
     } );
 
+    describe( "moveForegroundToFront method", function(){
+
+	it( "places foreground at higher z-index", function(){
+
+	    var display = new LayeredDisplay();
+
+	    display.moveForegroundToFront();
+
+	    assert.equal(
+		display.foreground.style.zIndex,
+		display.activeZ );
+
+	    assert.isTrue(
+		display.background.style.zIndex
+		< display.foreground.style.zIndex );
+	} );
+
+	it( "inverts moveBackgroundToFront", function(){
+
+	    var display = new LayeredDisplay();
+
+	    display.moveBackgroundToFront();
+	    display.moveForegroundToFront();
+
+	    assert.equal(
+		display.foreground.style.zIndex,
+		display.activeZ );
+
+	    assert.isTrue(
+		display.background.style.zIndex
+		< display.foreground.style.zIndex );
+	} );
+
+    } );
+
+    describe( "moveBackgroundToFront method", function(){
+
+	it( "places background at higher z-index", function(){
+
+	    var display = new LayeredDisplay();
+
+	    display.moveBackgroundToFront();
+
+	    assert.equal(
+		display.background.style.zIndex,
+		display.activeZ );
+
+	    assert.isTrue(
+		display.foreground.style.zIndex
+		< display.background.style.zIndex );
+	} );
+
+    } );
+
     describe( "on toggle", function(){
 
 	it( "switches foreground to background", function(){
