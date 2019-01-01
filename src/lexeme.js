@@ -219,7 +219,7 @@ class Lexeme{
 			    + " -> " + event.detail.object
 		    );
 
-		    var newRow = document.createElement( "p" );
+		    var newRow = document.createElement( "span" );
 
 		    newRow.appendChild( newText );
 		    this.tooltip.appendChild( newRow );
