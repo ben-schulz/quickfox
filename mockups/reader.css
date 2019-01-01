@@ -32,8 +32,6 @@
     left: 0;
     width: 50%;
     height: 100%;
-
-    z-index: 2;
 }
 
 
@@ -45,8 +43,6 @@
     left: 0;
     width: 0;
     height: 0;
-
-    z-index: 1;
 }
 
 .tripletooltip{

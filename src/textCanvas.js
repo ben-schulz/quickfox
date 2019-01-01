@@ -148,12 +148,13 @@ class LayeredDisplay{
     toggle(){
 
 	var next = this.layers.pop();
+	next.style.zIndex = this.activeZ;
+
+	var prev = this.layers.slice( -1 )[ 0 ];
+	prev.style.zIndex = this.inactiveZ;
+
 	this.layers.unshift( next );
-
-	this.active.style.zIndex = this.inactiveZ;
-
 	this.active = next;
-	this.active.style.zIndex = this.activeZ;
     }
 
     constructor(){
@@ -168,8 +169,12 @@ class LayeredDisplay{
 	this.foreground =
 	    document.createElement( this.elementType );
 
+	this.foreground.style.zIndex = this.activeZ;
+
 	this.background =
 	    document.createElement( this.elementType );
+
+	this.background.style.zIndex = this.inactiveZ;
 
 	this.container.appendChild( this.foreground );
 	this.container.appendChild( this.background );
@@ -384,8 +389,8 @@ class TextCanvas{
 
 	this.display = new LayeredDisplay();
 
-	this.textLayer = this.display.background;
-	this.tooltipLayer = this.display.foreground;
+	this.textLayer = this.display.foreground;
+	this.tooltipLayer = this.display.background;
 
 	this.highlights = [];
 
