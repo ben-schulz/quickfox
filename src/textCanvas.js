@@ -424,6 +424,11 @@ class TextCanvas{
 
 	this.tripleState = new TripleState();
 
+	this.tooltip = new Tooltip();
+	this.tooltip.addItems( "ok neat wow",
+			       "this line is even longer" );
+	this.tooltipLayer.appendChild( this.tooltip.element );
+
 	this.textLayer.addEventListener(
 	    "clearHighlights", event => {
 
@@ -431,15 +436,22 @@ class TextCanvas{
 	});
 
 	this.textLayer.addEventListener(
-	    "tooltipinactive", event => {
+	    "hidetooltip", event => {
 
 		this.display.moveForegroundToFront();
+
+		this.tooltip.hide();
 	    } );
 
 	this.textLayer.addEventListener(
-	    "tooltipactive", event => {
+	    "showtooltip", event => {
 
 		this.display.moveBackgroundToFront();
+
+		this.tooltip.show( {
+		    "clientX": event.detail.clientX,
+		    "clientY": event.detail.clientY
+		} );
 	    } );
 
 	this.textLayer.addEventListener(
@@ -452,10 +464,6 @@ class TextCanvas{
     addLexeme( lex ){
 
 	this.textLayer.appendChild( lex.element );
-
-	if( lex.tooltip ){
-	    this.tooltipLayer.appendChild( lex.tooltip );
-	}
 
 	if( !( lex.text in this.lexTable  ) ){
 

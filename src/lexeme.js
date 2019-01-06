@@ -115,21 +115,24 @@ class Lexeme{
 
 	    var rect = this.element.getBoundingClientRect();
 
-	    var tooltipLeftPixels = rect.right + window.scrollX;
+	    var tooltipLeftPixels = (
+		rect.right + window.scrollX
+	    );
 
-	    var tooltipTopPixels =
-		rect.bottom + window.scrollY - this.offsetY;
-
-	    this.tooltip.style.left = tooltipLeftPixels + "px";
-
-	    this.tooltip.style.top = tooltipTopPixels + "px" ;
+	    var tooltipTopPixels = (
+		rect.bottom + window.scrollY - this.offsetY
+	    );
 
 	    this.element.dispatchEvent(
 
-		    new CustomEvent( "tooltipactive", {
+		    new CustomEvent( "showtooltip", {
 
 			"bubbles": true,
-			"detail": { "target": this } } )
+			"detail": {
+			    "target": this,
+			    "clientX": tooltipLeftPixels,
+			    "clientY": tooltipTopPixels
+			} } )
 		);
 	}
     }

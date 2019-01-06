@@ -41,10 +41,36 @@ describe( "Lexeme", function(){
 
 		var lex = new Lexeme( "foo" );
 
+		var container = document.createElement( "div" );
+		container.appendChild( lex.element );
+
+		var tooltip = new Tooltip();
+
+		container.appendChild( tooltip.element );
+
+		container.addEventListener(
+		    "showtooltip", e => {
+
+			var event =
+			    new CustomEvent( "showtooltip", {
+
+				"detail": {
+				    "clientX": e.clientX,
+				    "clientY": e.clientY
+				}
+			    } );
+
+			tooltip.element.dispatchEvent( event );
+		    } );
+
 		lex.showAsReferent();
 		lex.mouseover();
 
-		assert.equal( lex.tooltip.style.display, "block" );
+		assert.equal(
+		    "block",
+		    tooltip.element.style.display
+		);
+
 	    } );
 
 	} );

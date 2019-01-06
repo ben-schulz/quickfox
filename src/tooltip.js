@@ -5,7 +5,7 @@ class Tooltip{
 	return this.element.childNodes;
     }
 
-    addItems( items ){
+    addItems( ...items ){
 
 	items.forEach( x => {
 
@@ -17,15 +17,23 @@ class Tooltip{
 
     render(){
 
+	var width = 0;
 	this.lines.forEach( l => {
 
 	    var line = document.createElement( "div" );
+
+	    var linePixels = this.pixelsPerChar * l.length;
+	    if( width < linePixels ){
+		width = linePixels
+	    }
 
 	    line.appendChild( 
 		document.createTextNode( l ) );
 
 	    this.element.appendChild( line );
 	} );
+
+	this.element.style.width = width + "px";
     }
 
     show( event ){
@@ -40,9 +48,17 @@ class Tooltip{
     }
 
 
+    hide( event ){
+
+	this.element.style.display = "none";
+    }
+
+
     constructor(){
 
 	this.lines = [];
+
+	this.pixelsPerChar = 7;
 
 	this.elementType = "div";
 	this.element = document.createElement(
@@ -51,11 +67,18 @@ class Tooltip{
 	this.element.classList.add( "tooltip" );
 
 	this.element.style.display = "none";
+	this.element.style.position = "absolute";
 
 	this.element.addEventListener( "showtooltip", event => {
 
 	    this.show( event.detail );
 	} );
+
+	this.element.addEventListener( "hidetooltip", event => {
+
+	    this.hide();
+	} );
+
 
     }
 }
