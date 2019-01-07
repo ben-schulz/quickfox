@@ -7,6 +7,13 @@ class Tooltip{
 
     addItems( ...items ){
 
+	this.element.childNodes.forEach( n => {
+
+	    n.remove();
+	} );
+
+	this.lines = [];
+
 	items.forEach( x => {
 
 	    this.lines.push( x );

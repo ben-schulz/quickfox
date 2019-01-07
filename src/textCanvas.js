@@ -360,6 +360,8 @@ class TextCanvas{
 
 	    target.dispatchEvent( save );
 	});
+
+	this.tripleStore.addTriple( this.tripleState );
     }
 
 
@@ -411,6 +413,8 @@ class TextCanvas{
 	    "left": 0
 	};
 
+	this.tripleStore = new TripleStore();
+
 	this.display = new LayeredDisplay();
 
 	this.textLayer = this.display.foreground;
@@ -425,8 +429,6 @@ class TextCanvas{
 	this.tripleState = new TripleState();
 
 	this.tooltip = new Tooltip();
-	this.tooltip.addItems( "ok neat wow",
-			       "this line is even longer" );
 	this.tooltipLayer.appendChild( this.tooltip.element );
 
 	this.textLayer.addEventListener(
@@ -447,6 +449,26 @@ class TextCanvas{
 	    "showtooltip", event => {
 
 		this.display.moveBackgroundToFront();
+
+		var subjects =
+		    this.tripleStore.querySubject(
+			t => t == event.detail.text );
+
+		var relations =
+		    this.tripleStore.queryRelation(
+			t => t == event.detail.text );
+
+		var objects =
+		    this.tripleStore.queryObject(
+			t => t == event.detail.text );
+
+		var result = {
+		    "subjects": subjects,
+		    "relations": relations,
+		    "objects": objects,
+		};
+
+		this.tooltip.addItems( JSON.stringify( result ) );
 
 		this.tooltip.show( {
 		    "clientX": event.detail.clientX,
