@@ -16,8 +16,7 @@ class Tooltip{
 
 	items.forEach( x => {
 
-	    var text = (
-		`${x[ 0 ]} : ${x[ 1 ]} : ${x[ 2 ]}` );
+	    var text = (`${x[ 0 ]} : ${x[ 1 ]} : ${x[ 2 ]}` );
 
 	    this.lines.push( text );
 	} );
