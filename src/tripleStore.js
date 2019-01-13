@@ -124,7 +124,7 @@ class TripleStore{
 
     static _queryTree( pred, tripleTree ){
 
-	var result = [];
+	var result= new TripleTree();
 
 	var keys = Object.keys( tripleTree.nodes );
 
@@ -132,33 +132,56 @@ class TripleStore{
 
 	    if( pred( k ) ){
 
-		var triple = {};
-		triple[ k ] = tripleTree.nodes[ k ];
+		var first = k;
+		var seconds = tripleTree.nodes[ first ];
 
-		result.push( triple );
+		Object.keys( seconds ).forEach( second => {
+
+		    var thirds =
+			tripleTree.nodes[ first ][ second ];
+
+		    Object.keys( thirds ).forEach( third => {
+			    result.insert( [
+				first,
+				second,
+				third
+			    ] );
+			} );
+		    } );
 	    }
-
 	} );
 
 	return result;
     }
 
-
     querySubject( pred ){
 
-	return TripleStore._queryTree( pred, this.bySubject );
+	var result = TripleStore._queryTree( pred, this.bySubject );
+
+	return result.flatten();
     }
 
 
     queryRelation( pred ){
 
-	return TripleStore._queryTree( pred, this.byRelation );
+	var result = TripleStore._queryTree(
+	    pred, this.byRelation );
+
+	return result.flatten().map( x => {
+
+	    return [ x[ 1 ], x[ 0 ], x[ 2 ] ];
+	} );
     }
 
 
     queryObject( pred ){
 
-	return TripleStore._queryTree( pred, this.byObject );
+	var result =  TripleStore._queryTree( pred, this.byObject );
+
+	return result.flatten().map( x => {
+
+	    return [ x[ 1 ], x[ 2 ], x[ 0 ]  ];
+	} );
     }
 
 

@@ -174,14 +174,7 @@ describe( "TripleStore", function(){
 		}
 	    );
 
-	    assert.isTrue( "foo" in results[ 0 ]  );
-
-	    assert.isTrue(
-		"bar" in results[ 0 ][ "foo" ]  );
-
-	    assert.isTrue(
-		"cat" in results[ 0 ][ "foo" ][ "bar" ]  );
-
+	    assertFoundInList( [ "foo", "bar", "cat" ], results );
 	} );
     } );
 
@@ -211,14 +204,7 @@ describe( "TripleStore", function(){
 		}
 	    );
 
-	    assert.isTrue( "bar" in results[ 0 ]  );
-
-	    assert.isTrue(
-		"foo" in results[ 0 ][ "bar" ]  );
-
-	    assert.isTrue(
-		"cat" in results[ 0 ][ "bar" ][ "foo" ]  );
-
+	    assertFoundInList( [ "foo", "bar", "cat" ], results );
 	} );
     } );
 
@@ -248,14 +234,7 @@ describe( "TripleStore", function(){
 		}
 	    );
 
-	    assert.isTrue( "cat" in results[ 0 ]  );
-
-	    assert.isTrue(
-		"foo" in results[ 0 ][ "cat" ]  );
-
-	    assert.isTrue(
-		"bar" in results[ 0 ][ "cat" ][ "foo" ]  );
-
+	    assertFoundInList( [ "foo", "bar", "cat" ], results );
 	} );
     } );
 
