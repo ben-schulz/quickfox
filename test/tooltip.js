@@ -6,7 +6,7 @@ describe( "ToolTip", function(){
 
 	    var tooltip = new Tooltip();
 
-	    tooltip.addItems( "first", "second" );
+	    tooltip.addItems( [ "first", "second" ] );
 
 	    assert.equal( 2, tooltip.childNodes.length );
 	} );
