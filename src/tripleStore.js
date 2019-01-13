@@ -122,18 +122,18 @@ class TripleStore{
     }
 
 
-    querySubject( pred ){
+    static _queryTree( pred, tripleTree ){
 
 	var result = [];
 
-	var keys = Object.keys( this.bySubject.nodes );
+	var keys = Object.keys( tripleTree.nodes );
 
 	keys.forEach( k => {
 
 	    if( pred( k ) ){
 
 		var triple = {};
-		triple[ k ] = this.bySubject.nodes[ k ];
+		triple[ k ] = tripleTree.nodes[ k ];
 
 		result.push( triple );
 	    }
@@ -143,47 +143,22 @@ class TripleStore{
 	return result;
     }
 
+
+    querySubject( pred ){
+
+	return TripleStore._queryTree( pred, this.bySubject );
+    }
+
+
     queryRelation( pred ){
 
-	var result = [];
-
-	var keys = Object.keys( this.byRelation.nodes );
-
-	keys.forEach( k => {
-
-	    if( pred( k ) ){
-
-		var triple = {};
-		triple[ k ] = this.byRelation.nodes[ k ];
-
-		result.push( triple );
-	    }
-
-	} );
-
-	return result;
+	return TripleStore._queryTree( pred, this.byRelation );
     }
 
 
     queryObject( pred ){
 
-	var result = [];
-
-	var keys = Object.keys( this.byObject.nodes );
-
-	keys.forEach( k => {
-
-	    if( pred( k ) ){
-
-		var triple = {};
-		triple[ k ] = this.byObject.nodes[ k ];
-
-		result.push( triple );
-	    }
-
-	} );
-
-	return result;
+	return TripleStore._queryTree( pred, this.byObject );
     }
 
 
