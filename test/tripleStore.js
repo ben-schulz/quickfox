@@ -1,3 +1,29 @@
+var assertFoundInList = function( item, list ){
+
+    for( var ix = 0; ix < list.length; ++ix ){
+
+	var x = list[ ix ];
+	if( item.length != x.length ){
+	    continue;
+	}
+
+	var zipped = x.map( function( x_item, ix ){
+
+	    return [ x_item, item[ ix ] ];
+	} );
+
+	var isMatch = zipped.every( z => {
+	    return z[ 0 ] === z[ 1 ]; } );
+
+	if( isMatch ){
+	    return;
+	}
+    }
+
+    assert.isTrue( false, `item [${item}] not in [${list}]` );
+};
+
+
 describe( "TripleTree", function(){
 
     it( "inserts by list order", function(){
@@ -12,6 +38,27 @@ describe( "TripleTree", function(){
 	tree.insert( b_triple );
 	assert.isTrue( "b" in tree.nodes );
 
+    } );
+
+    it( "flattens to original input", function(){
+
+	var tree = new TripleTree();
+
+	tree.insert( [ "a", "b", "c" ] );
+	tree.insert( [ "a", "b", "d" ] );
+
+	tree.insert( ["a", "r", "s" ] );
+	tree.insert( ["x", "y", "z" ] );
+
+	var result = tree.flatten();
+	console.info( result );
+
+	assert.equal( 4, result.length );
+
+	assertFoundInList( [ "a", "b", "c" ], result );
+	assertFoundInList( [ "a", "b", "d" ], result );
+	assertFoundInList( [ "a", "r", "s" ], result );
+	assertFoundInList( [ "x", "y", "z" ], result );
     } );
 } );
 

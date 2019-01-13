@@ -37,6 +37,25 @@ class TripleTree{
 	this.nodes[ first ][ second ][ third ] = third;
     }
 
+    flatten(){
+
+	var result = [];
+
+	Object.keys( this.nodes ).forEach( subj => {
+
+	    Object.keys( this.nodes[ subj ] ).forEach( rel => {
+
+		Object.keys( this.nodes[ subj ][ rel ] )
+		    .forEach( obj => {
+
+			result.push( [ subj, rel, obj ] );
+		    } );
+	    } );
+	} );
+
+	return result;
+    }
+
     constructor(){
 
 	this.nodes = {};
