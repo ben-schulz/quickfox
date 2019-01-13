@@ -5,7 +5,7 @@ class Tooltip{
 	return this.element.childNodes;
     }
 
-    addItems( ...items ){
+    addItems( items ){
 
 	this.element.childNodes.forEach( n => {
 
@@ -16,7 +16,10 @@ class Tooltip{
 
 	items.forEach( x => {
 
-	    this.lines.push( x );
+	    var text = (
+		`${x[ 0 ]} : ${x[ 1 ]} : ${x[ 2 ]}` );
+
+	    this.lines.push( text );
 	} );
 
 	this.render();

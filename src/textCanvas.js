@@ -462,13 +462,11 @@ class TextCanvas{
 		    this.tripleStore.queryObject(
 			t => t == event.detail.text );
 
-		var result = {
-		    "subjects": subjects,
-		    "relations": relations,
-		    "objects": objects,
-		};
+		var result = subjects
+		    .concat( relations )
+		    .concat( objects );
 
-		this.tooltip.addItems( JSON.stringify( result ) );
+		this.tooltip.addItems( result );
 
 		this.tooltip.show( {
 		    "clientX": event.detail.clientX,
