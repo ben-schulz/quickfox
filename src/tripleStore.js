@@ -133,7 +133,7 @@ class TripleStore{
 	    if( pred( k ) ){
 
 		var triple = {};
-		triple[ k ] = this.triples[ k ];
+		triple[ k ] = this.bySubject.nodes[ k ];
 
 		result.push( triple );
 	    }
