@@ -117,6 +117,26 @@ describe( "TripleStore", function(){
 
     describe( "addTriple", function(){
 
+	it( "normalizes all to lowercase", function(){
+
+	    var store = new TripleStore();
+	    store.addTriple( {
+		"subject": "foo",
+		"relation": "bar",
+		"object": "cat"
+	    } );
+
+	    store.addTriple( {
+		"subject": "FOO",
+		"relation": "bAr",
+		"object": "dog"
+	    } );
+
+	    assert.equal( "dog",
+			  store.triples[ "foo" ][ "bar" ][ "dog" ]
+			);
+	} );
+
 	it( "populates bySubject property", function(){
 
 	    var store = new TripleStore();

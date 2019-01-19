@@ -130,7 +130,7 @@ class Lexeme{
 			"bubbles": true,
 			"detail": {
 			    "target": this,
-			    "text": this.text,
+			    "text": this.text.toLowerCase(),
 			    "clientX": tooltipLeftPixels,
 			    "clientY": tooltipTopPixels
 			} } )

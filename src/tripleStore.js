@@ -162,43 +162,53 @@ class TripleStore{
 
     addTriple( t ){
 
+	var subject = t.subject.toLowerCase();
+	var relation = t.relation.toLowerCase();
+
+	if( t.object ){
+	    var object = t.object.toLowerCase();
+	}
+	else{
+	    var object = null;
+	}
+
 	this.bySubject.insert( [
 
-	    t.subject,
-	    t.relation,
-	    t.object
+	    subject,
+	    relation,
+	    object
 	] );
 
 
 	this.byRelation.insert( [
 
-	    t.relation,
-	    t.subject,
-	    t.object
+	    relation,
+	    subject,
+	    object
 	] );
 
 	this.byObject.insert( [
 
-	    t.object,
-	    t.subject,
-	    t.relation
+	    object,
+	    subject,
+	    relation
 	] );
 
 
-	if( !this.triples[ t.subject ] ){
+	if( !this.triples[ subject ] ){
 
-	    this.triples[ t.subject ] = {};
+	    this.triples[ subject ] = {};
 	}
 
-	if( !this.triples[ t.subject ][ t.relation ] ){
+	if( !this.triples[ subject ][ relation ] ){
 
-	    this.triples[ t.subject ][ t.relation ] = {};
+	    this.triples[ subject ][ relation ] = {};
 	}
 
-	if( TripleStore.isReferent( t.object ) ){
+	if( TripleStore.isReferent( object ) ){
 
-	    this.triples[ t.subject ][ t.relation ][ t.object ] =
-		t.object;
+	    this.triples[ subject ][ relation ][ object ] =
+		object;
 	}
     }
 
