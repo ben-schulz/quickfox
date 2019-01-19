@@ -1,8 +1,76 @@
 class TripleTree{
 
-    contains( key ){
 
-	return key in this.nodes;
+    iterate( f ){
+
+	Object.keys( this.nodes ).forEach( subj => {
+
+	    Object.keys( this.nodes[ subj ] ).forEach( rel => {
+
+		Object.keys( this.nodes[ subj ][ rel ] )
+		    .forEach( obj => {
+
+			f( subj, rel, obj );
+		    } );
+	    } );
+	} );
+    }
+
+    containsKey( key, depth=0 ){
+
+	if( 0 === depth ){
+	    return key in this.nodes;
+	}
+
+	else if( 1 === depth ){
+
+	    Object.keys( this.nodes ).forEach( first => {
+
+		if( key in this.nodes[ first ] ){
+
+		    return true;
+		}
+
+	    } );
+
+	    return false;
+	}
+
+	else if( 2 === depth ){
+
+	    Object.keys( this.nodes )
+		.forEach( first => {
+
+		    Object.keys( this.nodes[ first ] )
+			.forEach( second => {
+
+			    if( key in
+				this.nodes[ first ][ second ] ){
+
+				return true;
+			    }
+			} );
+		} );
+	}
+    }
+
+    containsTriple( t ){
+
+	if( 3 !== t.length ){
+
+	    return false;
+	}
+
+	var first = t[ 0 ]
+	var second = t[ 1 ]
+	var third = t[ 2 ]
+
+	return (
+
+	    first in self.nodes
+		&& second in self.nodes[ first ]
+		&& third in self.nodes[ first ][ second ]
+	)
     }
 
     ref( keys ){
@@ -37,20 +105,30 @@ class TripleTree{
 	this.nodes[ first ][ second ][ third ] = third;
     }
 
+    union( other ){
+
+	var result = new TripleTree();
+
+	this.iterate( ( first, second, third ) => {
+
+	    result.insert( [ first, second, third ] );
+	} );
+
+	other.iterate( ( first, second, third ) => {
+
+	    result.insert( [ first, second, third ] );
+	} );
+
+	return result;
+    }
+
     flatten(){
 
 	var result = [];
 
-	Object.keys( this.nodes ).forEach( subj => {
+	this.iterate( ( first, second, third ) => {
 
-	    Object.keys( this.nodes[ subj ] ).forEach( rel => {
-
-		Object.keys( this.nodes[ subj ][ rel ] )
-		    .forEach( obj => {
-
-			result.push( [ subj, rel, obj ] );
-		    } );
-	    } );
+	    result.push( [ first, second, third ] );
 	} );
 
 	return result;

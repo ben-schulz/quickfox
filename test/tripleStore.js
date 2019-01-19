@@ -60,6 +60,38 @@ describe( "TripleTree", function(){
 	assertFoundInList( [ "a", "r", "s" ], result );
 	assertFoundInList( [ "x", "y", "z" ], result );
     } );
+
+    it( "unions to tree with all distinct elements", function(){
+
+	var left = new TripleTree();
+	var right = new TripleTree();
+
+	left.insert( [ "a", "b", "c" ] );
+	left.insert( [ "a", "b", "d" ] );
+	left.insert( [ "a", "q", "s" ] );
+
+	right.insert( [ "b", "b", "c" ] );
+	right.insert( [ "b", "b", "d" ] );
+	right.insert( [ "a", "q", "t" ] );
+
+	left.insert( [ "a", "r", "s" ] );
+	right.insert( [ "a", "r", "s" ] );
+
+	var result = left.union( right ).flatten();
+
+	assert.equal( 7, result.length );
+
+	assertFoundInList( [ "a", "b", "c" ], result );
+	assertFoundInList( [ "a", "b", "d" ], result );
+	assertFoundInList( [ "a", "q", "s" ], result );
+
+	assertFoundInList( [ "b", "b", "c" ], result );
+	assertFoundInList( [ "b", "b", "d" ], result );
+	assertFoundInList( [ "a", "q", "t" ], result );
+
+	assertFoundInList( [ "a", "r", "s" ], result );
+
+    } );
 } );
 
 
@@ -95,7 +127,7 @@ describe( "TripleStore", function(){
 		"object": "cat"
 	    } );
 
-	    assert.isTrue( store.bySubject.contains( "foo" ) );
+	    assert.isTrue( store.bySubject.containsKey( "foo" ) );
 
 	    assert.isTrue(
 		"bar" in store.bySubject.ref( [ "foo" ] ) );
@@ -115,7 +147,7 @@ describe( "TripleStore", function(){
 		"object": "cat"
 	    } );
 
-	    assert.isTrue( store.byRelation.contains( "bar" ) );
+	    assert.isTrue( store.byRelation.containsKey( "bar" ) );
 
 	    assert.isTrue(
 		"foo" in store.byRelation.ref( [ "bar" ] ) );
@@ -136,7 +168,7 @@ describe( "TripleStore", function(){
 		"object": "cat"
 	    } );
 
-	    assert.isTrue( store.byObject.contains( "cat" ) );
+	    assert.isTrue( store.byObject.containsKey( "cat" ) );
 
 	    assert.isTrue(
 		"foo" in store.byObject.ref( [ "cat" ] ) );
