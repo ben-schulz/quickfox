@@ -206,7 +206,8 @@ describe( "TripleStore", function(){
 		}
 	    );
 
-	    assertFoundInList( [ "foo", "bar", "cat" ], results );
+	    assertFoundInList( [ "foo", "bar", "cat" ],
+			       results.flatten() );
 	} );
     } );
 
@@ -236,7 +237,8 @@ describe( "TripleStore", function(){
 		}
 	    );
 
-	    assertFoundInList( [ "foo", "bar", "cat" ], results );
+	    assertFoundInList( [ "foo", "bar", "cat" ],
+			       results.flatten() );
 	} );
     } );
 
@@ -266,7 +268,8 @@ describe( "TripleStore", function(){
 		}
 	    );
 
-	    assertFoundInList( [ "foo", "bar", "cat" ], results );
+	    assertFoundInList( [ "foo", "bar", "cat" ],
+			       results.flatten() );
 	} );
     } );
 

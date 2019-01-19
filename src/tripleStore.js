@@ -134,9 +134,17 @@ class TripleTree{
 	return result;
     }
 
-    constructor(){
+    constructor( triples=[] ){
 
 	this.nodes = {};
+
+	if( 0 < triples.length ){
+
+	    triples.forEach( t => {
+
+		this.insert( t );
+	    } );
+	}
     }
 }
 
@@ -236,7 +244,7 @@ class TripleStore{
 
 	var result = TripleStore._queryTree( pred, this.bySubject );
 
-	return result.flatten();
+	return result;
     }
 
 
@@ -245,10 +253,12 @@ class TripleStore{
 	var result = TripleStore._queryTree(
 	    pred, this.byRelation );
 
-	return result.flatten().map( x => {
+	var triples = result.flatten().map( x => {
 
 	    return [ x[ 1 ], x[ 0 ], x[ 2 ] ];
 	} );
+
+	return new TripleTree( triples );
     }
 
 
@@ -256,10 +266,12 @@ class TripleStore{
 
 	var result =  TripleStore._queryTree( pred, this.byObject );
 
-	return result.flatten().map( x => {
+	var triples = result.flatten().map( x => {
 
 	    return [ x[ 1 ], x[ 2 ], x[ 0 ]  ];
 	} );
+
+	return new TripleTree( triples );
     }
 
 

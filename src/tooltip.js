@@ -5,15 +5,18 @@ class Tooltip{
 	return this.element.childNodes;
     }
 
+    clear(){
+
+	while( this.element.firstChild ){
+
+	    this.element.removeChild( this.element.firstChild );
+	}
+	this.lines = [];
+    }
+
     addItems( items ){
 
-	this.element.childNodes.forEach( n => {
-
-	    n.remove();
-	} );
-
-	this.lines = [];
-
+	this.clear();
 	items.forEach( x => {
 
 	    var text = (`${x[ 0 ]} : ${x[ 1 ]} : ${x[ 2 ]}` );
@@ -65,6 +68,8 @@ class Tooltip{
 
     constructor(){
 
+	this._lock = false;
+
 	this.lines = [];
 
 	this.pixelsPerChar = 7;
@@ -87,7 +92,5 @@ class Tooltip{
 
 	    this.hide();
 	} );
-
-
     }
 }

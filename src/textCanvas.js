@@ -463,8 +463,9 @@ class TextCanvas{
 			t => t == event.detail.text );
 
 		var result = subjects
-		    .concat( relations )
-		    .concat( objects );
+		    .union( relations )
+		    .union( objects )
+		    .flatten();
 
 		this.tooltip.addItems( result );
 
