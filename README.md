@@ -3,7 +3,11 @@
 
 They are always relative. Often, they are defined relative to other words. This project attempts to construct a human-usable interface for tracing the textual relations that give rise to these meanings, and then writing them out in a machine-readable format, so that subjective, human-directed ideas can be explored with computational tools.
 
-## Getting Started
+## Demo
+
+This project is under heavy development, but [you can try out the tool](https://ben-schulz.github.io/demos/quickfox/reader.html) in its best-available working state.
+
+## Development: Getting Started
 
 clone this repo, and check the tests by browsing to:
 
