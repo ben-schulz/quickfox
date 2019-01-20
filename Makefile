@@ -17,12 +17,11 @@ watch:
 	which $(ENTR) || ( echo $(NEED_ENTR) && exit 1 )
 	ls $(SRC_FILES) | $(ENTR) $(ENTR_FLAGS) $(BROWSE) $(TESTPAGE)
 
-watchapp:
-	which $(ENTR) || ( echo $(NEED_ENTR) && exit 1 )
+app:
 	$(BUILD)
-	ls $(SRC_FILES) | $(ENTR) $(ENTR_FLAGS) $(BROWSE) $(APPPAGE)
+	$(BROWSE) $(APPPAGE)
 
 test:
 	$(BROWSE) $(TESTPAGE)
 
-.PHONY: watch watchapp test
+.PHONY: watch app test

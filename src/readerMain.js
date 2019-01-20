@@ -25,7 +25,9 @@ function downloadTriples( data, filename ){
 var fileSelector =
     document.getElementById( "inputFile" );
 
-var tripleView = document.getElementById( "tripleStore" );
+var storeSelector = document.getElementById( "inputTripleStore" );
+
+var tripleView = document.getElementById( "tripleStor" );
 
 var store = new TripleStore();
 
@@ -41,6 +43,25 @@ downloadButton.addEventListener( "click", event => {
     }
 
 });
+
+storeSelector.addEventListener(
+    "change", function( event ){
+
+	var selectedFile = storeSelector.files[0];
+
+	var fileReader = new FileReader();
+
+	fileReader.onload = function( event ){
+
+	    var contents = event.target.result;
+
+	    var json = JSON.parse( contents );
+
+	};
+
+	fileReader.readAsText( selectedFile );
+    } );
+
 
 fileSelector.addEventListener(
     "change", function( event ){
