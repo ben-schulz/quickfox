@@ -20,9 +20,10 @@ build_hash_pattern='||build_hash||'
 tmp_page='app/tmp.html'
 rm -f $tmp_page
 
-template_page='app/reader_template.html'
+template_page='src/reader_template.html'
 output_page='app/reader.html'
 
 sed -e "s/$build_hash_pattern/$this_commit/g" $template_page > $tmp_page
 
 cp $tmp_page $output_page
+rm $tmp_page
