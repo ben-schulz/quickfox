@@ -1,0 +1,10 @@
+src/keymap.js
+src/keyboard.js
+src/textBuffer.js
+src/charbox.js
+src/lexeme.js
+src/tooltip.js
+src/treeView.js
+src/tripleStore.js
+src/textCanvas.js
+src/readerMain.js
